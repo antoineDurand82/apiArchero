@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  mariadb:
+    image: mariadb:10.3.16
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${COMPOSE_PROJECT_NAME}
+      MYSQL_USER: ${COMPOSE_PROJECT_NAME}
+      MYSQL_PASSWORD: ${COMPOSE_PROJECT_NAME}
+    volumes:
+      - mariadb:/var/lib/mysql
+    command: --character-set-server=utf8 --collation-server=utf8_general_ci
+    ports:
+      - ${MARIADB_PORT}:3306
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: mariadb
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - ${PHPMYADMIN_PORT}:80
+    volumes:
+      - /sessions
+
+volumes:
+  mariadb:
