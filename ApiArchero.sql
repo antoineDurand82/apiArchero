@@ -189,13 +189,6 @@ CREATE TABLE `user_talent` (
 
 CREATE TABLE `users` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `user_heroes_id` int,
-  `user_talent_id` int,
-  `user_bracelet_id` int,
-  `user_locket_id` int,
-  `user_pet_id` int,
-  `user_ring_id` int,
-  `user_weapon_id` int,
   `max_hp` int,
   `attack` int,
   `attack_speed` int,
@@ -218,48 +211,34 @@ CREATE TABLE `upgrade_requirements` (
   `cum_scrolls` int
 );
 
-ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `user_weapon` (`user_id`);
+ALTER TABLE `user_weapon` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `user_weapon` ADD FOREIGN KEY (`weapon_id`) REFERENCES `weapons` (`id`);
 
-ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `user_armor` (`user_id`);
+ALTER TABLE `user_armor` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `user_armor` ADD FOREIGN KEY (`armor_id`) REFERENCES `armors` (`id`);
 
-ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `user_ring` (`user_id`);
+ALTER TABLE `user_ring` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `user_ring` ADD FOREIGN KEY (`ring_id`) REFERENCES `rings` (`id`);
 
-ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `user_pet` (`user_id`);
+ALTER TABLE `user_pet` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `user_pet` ADD FOREIGN KEY (`pet_id`) REFERENCES `pets` (`id`);
 
-ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `user_locket` (`user_id`);
+ALTER TABLE `user_locket` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `user_locket` ADD FOREIGN KEY (`locket_id`) REFERENCES `lockets` (`id`);
 
-ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `user_bracelet` (`user_id`);
+ALTER TABLE `user_bracelet` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `user_bracelet` ADD FOREIGN KEY (`bracelet_id`) REFERENCES `bracelets` (`id`);
 
-ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `user_hero` (`user_id`);
+ALTER TABLE `user_hero` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `user_hero` ADD FOREIGN KEY (`hero_id`) REFERENCES `heroes` (`id`);
 
-ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `user_talent` (`user_id`);
+ALTER TABLE `user_talent` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `user_talent` ADD FOREIGN KEY (`talent_id`) REFERENCES `talents` (`id`);
-
-ALTER TABLE `users` ADD FOREIGN KEY (`user_heroes_id`) REFERENCES `user_hero` (`id`);
-
-ALTER TABLE `users` ADD FOREIGN KEY (`user_talent_id`) REFERENCES `user_talent` (`id`);
-
-ALTER TABLE `users` ADD FOREIGN KEY (`user_bracelet_id`) REFERENCES `user_bracelet` (`id`);
-
-ALTER TABLE `users` ADD FOREIGN KEY (`user_locket_id`) REFERENCES `user_locket` (`id`);
-
-ALTER TABLE `users` ADD FOREIGN KEY (`user_pet_id`) REFERENCES `user_pet` (`id`);
-
-ALTER TABLE `users` ADD FOREIGN KEY (`user_ring_id`) REFERENCES `user_ring` (`id`);
-
-ALTER TABLE `users` ADD FOREIGN KEY (`user_weapon_id`) REFERENCES `user_weapon` (`id`);
