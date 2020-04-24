@@ -1,0 +1,11 @@
+{
+  "development": {
+    "username": "api_archero",
+    "password": "api_archero",
+    "database": "api_archero",
+    "host": "127.0.0.1",
+    "port": 6606,
+    "dialect": "mariadb",
+    "operatorsAliases": "0"
+  }
+}
