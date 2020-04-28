@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const CustomModel = require('./customModel.model')
 const DataTypes = Sequelize.DataTypes
 
-class Ring extends CustomModel{
+class Hero extends CustomModel{
   static customInit = {
     id: {
       type: DataTypes.INTEGER,
@@ -12,52 +12,42 @@ class Ring extends CustomModel{
     fullName: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "ring"
+      defaultValue: "hero"
     },
-    ringBuff: {
+    attack: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "buff"
+      defaultValue: 0
     },
     level: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0
     },
-    rarity: {
-      type: DataTypes.STRING,
+    maxHp: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: "rarity"
+      defaultValue: 0
     },
-    commonBuff: {
+    firstBuff: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "commonBuff"
+      defaultValue: "firstBuff"
     },
-    rareBuff: {
+    secondBuff: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "rareBuff"
+      defaultValue: "secondBuff"
     },
-    epicBuff: {
+    thirdBuff: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "epicBuff"
+      defaultValue: "thirdBuff"
     },
-    perfectEpicBuff: {
+    fourthBuff: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "perfectEpicBuff"
-    },
-    legendaryBuff: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "legendaryBuff"
-    },
-    ancientLegendaryBuff: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "ancientLegendaryBuff"
+      defaultValue: "fourthBuff"
     },
     linkImage: {
       type: DataTypes.STRING,
@@ -65,14 +55,14 @@ class Ring extends CustomModel{
       defaultValue: "No link found"
     },
   }
-  static customModelName = 'ring'
+  static customModelName = 'hero'
   static customRelations = [
     {
         type: 'belongsToMany',
         targetModel: 'user',
-        throughModel: 'userRing',
+        throughModel: 'userHero',
         options: {}
     }
   ]
 }
-module.exports = Ring
+module.exports = Hero

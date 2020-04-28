@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const CustomModel = require('./customModel.model')
 const DataTypes = Sequelize.DataTypes
 
-class UserRing extends CustomModel{
+class UserHero extends CustomModel{
   static customInit = {
     id: {
       type: DataTypes.INTEGER,
@@ -13,13 +13,8 @@ class UserRing extends CustomModel{
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0
-    },
-    rarity: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "common"
     }
   }
-  static customModelName = 'userRing'
+  static customModelName = 'userHero'
 }
-module.exports = UserRing
+module.exports = UserHero

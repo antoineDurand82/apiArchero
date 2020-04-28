@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const CustomModel = require('./customModel.model')
 const DataTypes = Sequelize.DataTypes
 
-class Ring extends CustomModel{
+class Weapon extends CustomModel{
   static customInit = {
     id: {
       type: DataTypes.INTEGER,
@@ -12,13 +12,18 @@ class Ring extends CustomModel{
     fullName: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "ring"
+      defaultValue: "weapon"
     },
-    ringBuff: {
-      type: DataTypes.STRING,
+    attack: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: "buff"
+      defaultValue: 0
     },
+    attackSpeed: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
     level: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -28,11 +33,6 @@ class Ring extends CustomModel{
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "rarity"
-    },
-    commonBuff: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "commonBuff"
     },
     rareBuff: {
       type: DataTypes.STRING,
@@ -65,14 +65,14 @@ class Ring extends CustomModel{
       defaultValue: "No link found"
     },
   }
-  static customModelName = 'ring'
+  static customModelName = 'weapon'
   static customRelations = [
     {
         type: 'belongsToMany',
         targetModel: 'user',
-        throughModel: 'userRing',
+        throughModel: 'userWeapon',
         options: {}
     }
   ]
 }
-module.exports = Ring
+module.exports = Weapon

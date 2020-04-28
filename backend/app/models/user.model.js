@@ -11,7 +11,7 @@ class User extends CustomModel{
     },
     maxHP: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false
     }
   }
   static customModelName = 'user'
@@ -22,6 +22,49 @@ class User extends CustomModel{
       throughModel: 'userRing',
       options: {}
     }
+    // ,
+    // {
+    //   type: 'belongsToMany',
+    //   targetModel: 'armor',
+    //   throughModel: 'userArmor',
+    //   options: {}
+    // },
+    // {
+    //   type: 'belongsToMany',
+    //   targetModel: 'bracelet',
+    //   throughModel: 'userBracelet',
+    //   options: {}
+    // },
+    // {
+    //   type: 'belongsToMany',
+    //   targetModel: 'hero',
+    //   throughModel: 'userHero',
+    //   options: {}
+    // },
+    // {
+    //   type: 'belongsToMany',
+    //   targetModel: 'locket',
+    //   throughModel: 'userLocket',
+    //   options: {}
+    // },
+    // {
+    //   type: 'belongsToMany',
+    //   targetModel: 'pet',
+    //   throughModel: 'userPet',
+    //   options: {}
+    // },
+    // {
+    //   type: 'belongsToMany',
+    //   targetModel: 'talent',
+    //   throughModel: 'userTalent',
+    //   options: {}
+    // },
+    // {
+    //   type: 'belongsToMany',
+    //   targetModel: 'weapon',
+    //   throughModel: 'userWeapon',
+    //   options: {}
+    // }
   ]
 }
 module.exports = User

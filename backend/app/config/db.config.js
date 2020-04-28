@@ -3,8 +3,8 @@ module.exports = {
     USER: "root",
     PASSWORD: "root",
     DB: "api_archero",
-    dialect: "mysql",
-    PORT: 6606,
+    dialect: "mariadb",
+    PORT:6606,
     pool: {
       max: 5,
       min: 0,

@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const CustomModel = require('./customModel.model')
 const DataTypes = Sequelize.DataTypes
 
-class Ring extends CustomModel{
+class Locket extends CustomModel{
   static customInit = {
     id: {
       type: DataTypes.INTEGER,
@@ -12,12 +12,12 @@ class Ring extends CustomModel{
     fullName: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "ring"
+      defaultValue: "locket"
     },
-    ringBuff: {
-      type: DataTypes.STRING,
+    maxHp: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: "buff"
+      defaultValue: 0
     },
     level: {
       type: DataTypes.INTEGER,
@@ -65,14 +65,14 @@ class Ring extends CustomModel{
       defaultValue: "No link found"
     },
   }
-  static customModelName = 'ring'
+  static customModelName = 'locket'
   static customRelations = [
     {
         type: 'belongsToMany',
         targetModel: 'user',
-        throughModel: 'userRing',
+        throughModel: 'userLocket',
         options: {}
     }
   ]
 }
-module.exports = Ring
+module.exports = Locket
