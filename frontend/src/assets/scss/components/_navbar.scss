@@ -1,0 +1,22 @@
+.navbar {
+  @apply flex items-center justify-between flex-wrap bg-teal-500 p-8 fixed w-full;
+  &-logo {
+    @apply flex items-center flex-shrink-0 text-white mr-6;
+  }
+  &-menu-button {
+    @apply flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400;
+    &:hover {
+      @apply text-white border-white;
+    }
+  }
+  &-dashboard-button {
+    @apply inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white ml-auto;
+    &:hover {
+      @apply border-transparent text-teal-500 bg-white;
+    }
+    &:lg {
+      @apply mt-0;
+    }
+  }
+
+}
