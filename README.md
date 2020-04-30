@@ -17,7 +17,7 @@ Une commande utile : docker volume prune (attention ça remove tous les volumes 
 
 Commande pour insert 1 item dans la bdd (pour test avant vrai remplissage)
 ```
-INSERT INTO `armors`(`id`, `full_name`, `max_hp`, `level`, `rarity`, `common_buff`, `rare_buff`, `epic_buff`, `perfect_epic_buff`, `legendary_buff`, `ancient_legendary_buff`, `link_image`) VALUES (0,"Golden chestplate",100,0,"rarity","common_buff","rare_buff","epic_buff","perfect_epic_buff","legendary_buff","ancient_legendary_buff","link_image");
+INSERT INTO `armors`(`id`, `fullName`, `maxHp`, `level`, `rarity`, `commonBuff`, `rareBuff`, `epicBuff`, `perfectEpicBuff`, `legendaryBuff`, `ancientLegendaryBuff`, `linkImage`) VALUES (0,"Golden chestplate",100,0,"rarity","common_buff","rare_buff","epic_buff","perfect_epic_buff","legendary_buff","ancient_legendary_buff","link_image");
 ```
 
 Pour seed: 

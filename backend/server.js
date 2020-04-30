@@ -22,6 +22,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to bezkoder application." });
 });
+require("./app/routes/armor.routes")(app);
+require("./app/routes/bracelet.routes")(app);
+require("./app/routes/hero.routes")(app);
+require("./app/routes/locket.routes")(app);
+require("./app/routes/pet.routes")(app);
+require("./app/routes/ring.routes")(app);
+require("./app/routes/talent.routes")(app);
+require("./app/routes/user.routes")(app);
+require("./app/routes/weapon.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
