@@ -2,7 +2,7 @@
   <div class="sidebar">
     <ul>
       <li class="sidebar-li" v-for="link in links" :key="link.name">
-        <router-link :to="link.route">{{ link.name }}</router-link>
+        <router-link class="sidebar-li-link" :to="link.route">{{ link.name }}</router-link>
       </li>
     </ul>
   </div>

@@ -1,0 +1,9 @@
+.btn {
+  @apply rounded;
+  &:not(.big) {
+    @apply px-2 py-1;
+  }
+  &.big {
+    @apply px-3 py-2;
+  }
+}

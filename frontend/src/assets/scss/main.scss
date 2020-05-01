@@ -1,7 +1,7 @@
+@import "tailwindcss/base";
 
-  @import "tailwindcss/base";
+@import "tailwindcss/components";
+// Mettre mes propres composants ici
+@import "./components/button";
 
-  @import "tailwindcss/components";
-  // Mettre mes propres composants ici
-
-  @import "tailwindcss/utilities";
+@import "tailwindcss/utilities";
