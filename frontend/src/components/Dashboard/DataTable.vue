@@ -1,176 +1,175 @@
 <template>
-  <div class="datatable">
-    <table>
-      <thead >
-				<tr class="text-left">
-					<th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">
+	<div class="datatable">
+		<div class="flex items-center mb-2">
+			<div>
+				<button class="px-2 py-1 bg-teal-700 text-white rounded mr-2" @click="openEditModal()">
+					Add {{ form.name }}
+				</button>
+				<button class="px-2 py-1 bg-red-700 text-white rounded" @click="deleteData()">
+					<i class="fas fa-trash-alt"></i>
+				</button>
+			</div>
+			<div class="ml-auto">
+				<label for="rowsPerPage">
+					Rows per page
+				</label>
+				<select class="p-1 rounded border border-gray-300 bg-white" id="rowsPerPage" v-model="currentPerPage">
+					<option v-for="(opt, index) in perPage" :key="opt" :value="index">
+						{{ opt }}
+					</option>
+				</select>
+			</div>
+		</div>
+		<table class="w-full">
+			<thead>
+				<tr class="text-left bg-gray-100 text-gray-600 tracking-wider uppercase text-xs font-bold">
+					<th class="py-2 px-3 border-b border-gray-200">
 						<label
-							class="text-teal-500 inline-flex justify-between items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer">
-							<input type="checkbox" class="form-checkbox focus:outline-none focus:shadow-outline" >
+							class="inline-flex items-center px-2 py-2">
+							<input :checked="isAllSelected" type="checkbox" class="form-checkbox focus:outline-none" @change="toggleSelect()">
 						</label>
 					</th>
-					<th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider uppercase text-xs"
+					<th class="border-b border-gray-200 px-6 py-2"
 						v-for="column in columns" :key="column.key">
-						{{ column.value }}
+						{{ column.name }}
+					</th>
+					<th class="py-2 px-3 border-b border-gray-200">
+						Actions
 					</th>
 				</tr>
-      </thead>
-      <tbody>
-        <tr v-for="user in users" :key="user.userId">
-          <td class="border-dashed border-t border-gray-200 px-3">
-            <label
-              class="text-teal-500 inline-flex justify-between items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer">
-              <input type="checkbox" class="form-checkbox rowCheckbox focus:outline-none " :name="user.userId">
-            </label>
-          </td>
-					<td v-for="column in columns" :key="column.key"  class="border-dashed border-t border-gray-200 userId">
-						<span class="text-gray-700 px-6 py-3 flex items-center" >{{ user[column.key] }}</span>
+			</thead>
+			<tbody class="datatable-body">
+				<tr v-for="model in data.data" :key="model[primaryKey]" class="text-gray-700 hover:bg-gray-200">
+					<td class="border-dashed border-t border-gray-200 px-3">
+						<label
+							class="inline-flex items-center px-2 py-2">
+							<input :checked="isSelected(model)" type="checkbox" class="form-checkbox rowCheckbox focus:outline-none" @change="toggleSelect(model)">
+						</label>
 					</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+					<td v-for="column in columns" :key="column.key" class="border-dashed border-t border-gray-200 px-6 py-3">
+						<slot :name="'cell:' + column.key" :scope="model">
+							<span>{{ model[column.key] }}</span>
+						</slot>
+					</td>
+					<td class="py-2 px-3 border-dashed border-t border-gray-200">
+						<button class="mr-2 btn bg-teal-700 text-white rounded" @click="openEditModal(model)">
+							<i class="fas fa-pencil-alt"></i>
+						</button>
+						<button class="btn bg-red-700 text-white rounded" @click="deleteData(model)">
+							<i class="fas fa-trash-alt"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="flex items-center mt-2">
+			<div class="ml-auto">
+				<label for="currentPage">
+					Current page
+				</label>
+				<button
+					:class="['mr-2 focus:outline-none', currentPage == 1 ? 'text-gray-400' : '']"
+					@click="currentPage = currentPage > 1 ? currentPage - 1 : currentPage"
+					:disabled="currentPage == 1"
+				>
+					<i class="fas fa-chevron-left"></i>
+				</button>
+				<input type="text" id="currentPage" class="p-1 border rounded border-gray-300 focus:outline-none focus:shadow w-12 text-right" v-model="currentPage">
+				<button
+					:class="['ml-2 focus:outline-none', currentPage == data.totalPages ? 'text-gray-400' : '']"
+					@click="currentPage = currentPage < data.totalPages ? currentPage + 1 : currentPage"
+					:disabled="currentPage == data.totalPages"
+				>
+					<i class="fas fa-chevron-right"></i>
+				</button>
+			</div>
+		</div>
+    <EditModal :model="editingModel" ref="editModal" :form="form" @submit="submitForm" />
+	</div>
 </template>
 
 <script>
+import { chunk, map, isEqual } from 'lodash'
+
 export default {
-  data() {
-		return {
-			columns: [
-				{
-					'key': 'userId',
-					'value': 'User ID'
-				},
-				{
-					'key': 'firstName',
-					'value': 'Firstname'
-				},
-				{
-					'key': 'lastName',
-					'value': 'Lastname'
-				},
-				{
-					'key': 'emailAddress',
-					'value': 'Email'
-				},
-				{
-					'key': 'gender',
-					'value': 'Gender'
-				},
-				{
-					'key': 'phoneNumber',
-					'value': 'Phone'
-				}
-			],
-			users: [
-				{
-					"userId": 1,
-					"firstName": "Cort",
-					"lastName": "Tosh",
-					"emailAddress": "ctosh0@github.com",
-					"gender": "Male",
-					"phoneNumber": "327-626-5542"
-				}, {
-					"userId": 2,
-					"firstName": "Brianne",
-					"lastName": "Dzeniskevich",
-					"emailAddress": "bdzeniskevich1@hostgator.com",
-					"gender": "Female",
-					"phoneNumber": "144-190-8956"
-				}, {
-					"userId": 3,
-					"firstName": "Isadore",
-					"lastName": "Botler",
-					"emailAddress": "ibotler2@gmpg.org",
-					"gender": "Male",
-					"phoneNumber": "350-937-0792"
-				}, {
-					"userId": 4,
-					"firstName": "Janaya",
-					"lastName": "Klosges",
-					"emailAddress": "jklosges3@amazon.de",
-					"gender": "Female",
-					"phoneNumber": "502-438-7799"
-				}, {
-					"userId": 5,
-					"firstName": "Freddi",
-					"lastName": "Di Claudio",
-					"emailAddress": "fdiclaudio4@phoca.cz",
-					"gender": "Female",
-					"phoneNumber": "265-448-9627"
-				}, {
-					"userId": 6,
-					"firstName": "Oliy",
-					"lastName": "Mairs",
-					"emailAddress": "omairs5@fda.gov",
-					"gender": "Female",
-					"phoneNumber": "221-516-2295"
-				}, {
-					"userId": 7,
-					"firstName": "Tabb",
-					"lastName": "Wiseman",
-					"emailAddress": "twiseman6@friendfeed.com",
-					"gender": "Male",
-					"phoneNumber": "171-817-5020"
-				}, {
-					"userId": 8,
-					"firstName": "Joela",
-					"lastName": "Betteriss",
-					"emailAddress": "jbetteriss7@msu.edu",
-					"gender": "Female",
-					"phoneNumber": "481-100-9345"
-				}, {
-					"userId": 9,
-					"firstName": "Alistair",
-					"lastName": "Vasyagin",
-					"emailAddress": "avasyagin8@gnu.org",
-					"gender": "Male",
-					"phoneNumber": "520-669-8364"
-				}, {
-					"userId": 10,
-					"firstName": "Nealon",
-					"lastName": "Ratray",
-					"emailAddress": "nratray9@typepad.com",
-					"gender": "Male",
-					"phoneNumber": "993-654-9793"
-				}, {
-					"userId": 11,
-					"firstName": "Annissa",
-					"lastName": "Kissick",
-					"emailAddress": "akissicka@deliciousdays.com",
-					"gender": "Female",
-					"phoneNumber": "283-425-2705"
-				}, {
-					"userId": 12,
-					"firstName": "Nissie",
-					"lastName": "Sidnell",
-					"emailAddress": "nsidnellb@freewebs.com",
-					"gender": "Female",
-					"phoneNumber": "754-391-3116"
-				}, {
-					"userId": 13,
-					"firstName": "Madalena",
-					"lastName": "Fouch",
-					"emailAddress": "mfouchc@mozilla.org",
-					"gender": "Female",
-					"phoneNumber": "584-300-9004"
-				}, {
-					"userId": 14,
-					"firstName": "Rozina",
-					"lastName": "Atkins",
-					"emailAddress": "ratkinsd@japanpost.jp",
-					"gender": "Female",
-					"phoneNumber": "792-856-0845"
-				}, {
-					"userId": 15,
-					"firstName": "Lorelle",
-					"lastName": "Sandcroft",
-					"emailAddress": "lsandcrofte@google.nl",
-					"gender": "Female",
-					"phoneNumber": "882-911-7241"
-				}]
+	components: {
+    EditModal: () => import('@/components/Dashboard/EditModal'),
+	},
+	props: {
+		perPage: {
+			type: Array,
+			default: () => [
+				5, 15, 25
+			]
+		},
+		primaryKey: {
+			type: String,
+			default: 'id'
+		},
+		columns: {
+			type: Array,
+			required: true
+		},
+		rawData: {
+			type: Array,
+			required: true
+		},
+		form: {
+			type: Object,
+			required: true
 		}
-  }
+	},
+  data: () => ({
+		selected: [],
+		currentPerPage: 0,
+		currentPage: 1,
+		editingModel: undefined
+  }),
+	computed: {
+		data() {
+			const chunkedData = chunk(this.rawData, this.perPage[this.getIndexForArray(this.currentPerPage, this.perPage)])
+			return {
+				data: chunkedData[this.getIndexForArray(this.currentPage - 1, chunkedData)],
+				totalPages: chunkedData.length
+			}
+		},
+		isAllSelected() {
+			return isEqual(this.selected, this.data.data)
+		}
+	},
+	methods: {
+		getIndexForArray(index, array) {
+			return index >= 0 && index < array.length ? index : 0
+		},
+		toggleSelect(model = null) {
+			if(model) {
+				const index = this.selected.indexOf(model)
+				if(index === -1) this.selected.push(model)
+				else this.selected.splice(index, 1)
+			} else {
+				this.selected = isEqual(this.selected, this.data.data) ? [] : this.data.data
+			}
+		},
+		isSelected(model) {
+			return map(this.selected, this.primaryKey).indexOf(model[this.primaryKey]) !== -1
+		},
+		deleteData(model = null) {
+			const ok = confirm('Confirm delete ?')
+			if(!ok) return
+			const models = model ? [model] : this.selected
+			this.selected = []
+			this.$emit('delete', models)
+		},
+		submitForm(model) {
+			this.$refs.editModal.toggle(false)
+			this.editingModel = undefined
+			this.$emit('submit', model)
+		},
+		openEditModal(model = undefined) {
+			this.editingModel = {...model}
+			this.$refs.editModal.toggle(true)
+		}
+	}
 }
 </script>
 
