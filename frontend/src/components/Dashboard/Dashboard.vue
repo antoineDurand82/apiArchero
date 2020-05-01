@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <Sidebar></Sidebar>
-    <router-view></router-view>
+    <router-view class="dashboard-router"></router-view>
   </div>
 </template>
 
@@ -17,5 +17,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+  @import '~Style/components/dashboard';
 </style>
