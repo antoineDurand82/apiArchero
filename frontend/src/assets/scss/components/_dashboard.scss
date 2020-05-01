@@ -1,0 +1,7 @@
+.dashboard {
+  &-router{
+    @apply ml-auto;
+    width: calc(100vw - 13rem);
+    height: calc(100vh - 64px);
+  }
+}
