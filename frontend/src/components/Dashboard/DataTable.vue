@@ -82,6 +82,9 @@
 				>
 					<i class="fas fa-chevron-right"></i>
 				</button>
+				<span class="ml-2">
+					Total pages : {{ data.totalPages }}
+				</span>
 			</div>
 		</div>
     <EditModal :model="editingModel" ref="editModal" :form="form" @submit="submitForm" />
