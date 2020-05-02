@@ -63,7 +63,7 @@ export default {
       this.validationFields = newValue
     },
     model() {
-      if(this.model) this.editingModel = {...this.model}
+      if(this.model) this.editingModel = this.model
       else {
         const model = {}
         this.form.fields.forEach((field) => {

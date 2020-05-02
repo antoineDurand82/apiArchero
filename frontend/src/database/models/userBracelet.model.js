@@ -4,8 +4,9 @@ import { Model } from '@vuex-orm/core'
 
 export default class UserBracelet extends Model {
   
-  static entity = 'userBracelet'
+  static entity = 'userBracelets'
   static primaryKey = 'id'
+  static apiPath = 'userBracelets'
 
   static fields () {
     return {

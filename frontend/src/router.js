@@ -14,21 +14,9 @@ export default new Router({
         // Routes for users
         {
           // /dashboard/users
-          path: "/users",
-          name: "users",
-          component: () => import("./components/UserComponent/UsersList")
-        },
-        {
-          // /dashboard/users/:id
-          path: "/users/:id",
-          name: "user-details",
-          component: () => import("./components/UserComponent/User")
-        },
-        {
-          // /dashboard/users/:id
-          path: "/users/add",
-          name: "user-add",
-          component: () => import("./components/UserComponent/AddUser")
+          path: ":entityName",
+          name: "modelsCRUD",
+          component: () => import("./components/Dashboard/ModelsCRUD")
         }
       ]
     },

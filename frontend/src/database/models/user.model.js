@@ -24,6 +24,7 @@ export default class User extends Model {
 
   static entity = 'users'
   static primaryKey = 'id'
+  static apiPath = 'users'
 
   static fields () {
     return {
@@ -32,7 +33,7 @@ export default class User extends Model {
       attack: this.number(0),
       attackSpeed: this.number(0),
       dodgeRate: this.number(0),
-      damagaResistance: this.number(0),
+      damageResistance: this.number(0),
       healingRedHearts: this.number(0),
       projectileResistance: this.number(0),
       collisionResistance: this.number(0),

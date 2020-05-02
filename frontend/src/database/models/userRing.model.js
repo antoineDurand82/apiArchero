@@ -4,8 +4,9 @@ import { Model } from '@vuex-orm/core'
 
 export default class UserRing extends Model {
   
-  static entity = 'userRing'
+  static entity = 'userRings'
   static primaryKey = 'id'
+  static apiPath = 'userRings'
 
   static fields () {
     return {

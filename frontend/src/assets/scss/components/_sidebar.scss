@@ -1,10 +1,11 @@
 .sidebar {
-  @apply flex w-48 bg-teal-600 mr-auto fixed justify-center shadow-2xl opacity-75;
-  height: calc(100vh - 64px);
+  @apply flex w-64 bg-teal-600 mr-auto fixed justify-center shadow-2xl opacity-75 px-2 overflow-y-auto left-0;
+  top: 96px;
+  height: calc(100vh - 96px);
   &-li {
-    @apply mt-6;
+    @apply py-3;
     &-link {
-      @apply text-xl font-medium border rounded text-white border-white px-4 py-2;
+      @apply block text-center text-lg font-medium border rounded text-white border-white px-4 py-2;
       &:hover {
         @apply border-transparent text-teal-600 opacity-75 bg-white;
       }

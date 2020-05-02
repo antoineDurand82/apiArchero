@@ -33,7 +33,7 @@
 						v-for="column in columns" :key="column.key">
 						{{ column.name }}
 					</th>
-					<th class="py-2 px-3 border-b border-gray-200">
+					<th class="py-2 px-3 border-b border-gray-200" align="right">
 						Actions
 					</th>
 				</tr>
@@ -51,7 +51,7 @@
 							<span>{{ model[column.key] }}</span>
 						</slot>
 					</td>
-					<td class="py-2 px-3 border-dashed border-t border-gray-200">
+					<td class="py-2 px-3 border-dashed border-t border-gray-200 whitespace-no-wrap" align="right">
 						<button class="mr-2 btn bg-teal-700 text-white rounded" @click="openEditModal(model)">
 							<i class="fas fa-pencil-alt"></i>
 						</button>
@@ -169,7 +169,7 @@ export default {
 			this.$emit('submit', model)
 		},
 		openEditModal(model = undefined) {
-			this.editingModel = {...model}
+			this.editingModel = model
 			this.$refs.editModal.toggle(true)
 		}
 	}

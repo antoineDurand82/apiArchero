@@ -7,8 +7,9 @@ import UserRing from './userRing.model'
 
 export default class Ring extends Model {
   
-  static entity = 'ring'
+  static entity = 'rings'
   static primaryKey = 'id'
+  static apiPath = 'rings'
 
   static fields () {
     return {

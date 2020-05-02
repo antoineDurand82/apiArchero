@@ -7,8 +7,9 @@ import UserWeapon from './userWeapon.model'
 
 export default class Weapon extends Model {
   
-  static entity = 'weapon'
+  static entity = 'weapons'
   static primaryKey = 'id'
+  static apiPath = 'weapons'
 
   static fields () {
     return {

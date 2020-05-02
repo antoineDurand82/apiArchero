@@ -7,8 +7,9 @@ import UserHero from './userHero.model'
 
 export default class Hero extends Model {
   
-  static entity = 'hero'
+  static entity = 'heroes'
   static primaryKey = 'id'
+  static apiPath = 'heroes'
 
   static fields () {
     return {

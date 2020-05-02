@@ -7,8 +7,9 @@ import UserLocket from './userLocket.model'
 
 export default class Locket extends Model {
   
-  static entity = 'locket'
+  static entity = 'lockets'
   static primaryKey = 'id'
+  static apiPath = 'lockets'
 
   static fields () {
     return {
