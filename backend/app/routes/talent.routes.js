@@ -3,25 +3,22 @@ module.exports = app => {
   
     var router = require("express").Router();
   
-    // Create a new Tutorial
+    // Create a new Talent
     router.post("/", talents.create);
   
     // Retrieve all talents
     router.get("/", talents.findAll);
   
-    // Retrieve all published talents
-    router.get("/published", talents.findAllPublished);
-  
-    // Retrieve a single Tutorial with id
+    // Retrieve a single Talent with id
     router.get("/:id", talents.findOne);
   
-    // Update a Tutorial with id
+    // Update a Talent with id
     router.put("/:id", talents.update);
   
-    // Delete a Tutorial with id
+    // Delete a Talent with id
     router.delete("/:id", talents.delete);
   
-    // Create a new Tutorial
+    // Create a new Talent
     router.delete("/", talents.deleteAll);
   
     app.use('/api/talents', router);

@@ -15,8 +15,6 @@ exports.create = (req, res) => {
   const locket = {
     fullName: req.body.fullName,
     maxHp: req.body.maxHp,
-    level: req.body.level,
-    rarity: req.body.rarity,
     commonBuff: req.body.commonBuff,
     rareBuff: req.body.rareBuff,
     epicBuff: req.body.epicBuff,

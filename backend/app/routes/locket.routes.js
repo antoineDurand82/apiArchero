@@ -3,25 +3,22 @@ module.exports = app => {
   
     var router = require("express").Router();
   
-    // Create a new Tutorial
+    // Create a new Locket
     router.post("/", lockets.create);
   
     // Retrieve all lockets
     router.get("/", lockets.findAll);
   
-    // Retrieve all published lockets
-    router.get("/published", lockets.findAllPublished);
-  
-    // Retrieve a single Tutorial with id
+    // Retrieve a single Locket with id
     router.get("/:id", lockets.findOne);
   
-    // Update a Tutorial with id
+    // Update a Locket with id
     router.put("/:id", lockets.update);
   
-    // Delete a Tutorial with id
+    // Delete a Locket with id
     router.delete("/:id", lockets.delete);
   
-    // Create a new Tutorial
+    // Create a new Locket
     router.delete("/", lockets.deleteAll);
   
     app.use('/api/lockets', router);

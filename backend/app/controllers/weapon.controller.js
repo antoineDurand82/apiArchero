@@ -16,8 +16,6 @@ exports.create = (req, res) => {
     fullName: req.body.fullName,
     attack: req.body.attack,
     attackSpeed: req.body.attackSpeed,
-    level: req.body.level,
-    rarity: req.body.rarity,
     rareBuff: req.body.rareBuff,
     epicBuff: req.body.epicBuff,
     perfectEpicBuff: req.body.perfectEpicBuff,

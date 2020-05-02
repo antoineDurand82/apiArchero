@@ -15,7 +15,6 @@ exports.create = (req, res) => {
   const hero = {
     fullName: req.body.fullName,
     attack: req.body.attack,
-    level: req.body.level,
     maxHp: req.body.maxHp,
     firstBuff: req.body.firstBuff,
     secondBuff: req.body.secondBuff,

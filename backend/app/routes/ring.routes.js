@@ -3,25 +3,22 @@ module.exports = app => {
   
     var router = require("express").Router();
   
-    // Create a new Tutorial
+    // Create a new Ring
     router.post("/", rings.create);
   
     // Retrieve all rings
     router.get("/", rings.findAll);
   
-    // Retrieve all published rings
-    router.get("/published", rings.findAllPublished);
-  
-    // Retrieve a single Tutorial with id
+    // Retrieve a single Ring with id
     router.get("/:id", rings.findOne);
   
-    // Update a Tutorial with id
+    // Update a Ring with id
     router.put("/:id", rings.update);
   
-    // Delete a Tutorial with id
+    // Delete a Ring with id
     router.delete("/:id", rings.delete);
   
-    // Create a new Tutorial
+    // Create a new Ring
     router.delete("/", rings.deleteAll);
   
     app.use('/api/rings', router);

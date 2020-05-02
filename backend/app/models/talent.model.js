@@ -14,11 +14,6 @@ class Talent extends CustomModel{
       allowNull: false,
       defaultValue: "talent"
     },
-    level: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
     buff: {
       type: DataTypes.STRING,
       allowNull: false,

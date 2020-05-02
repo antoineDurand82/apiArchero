@@ -24,16 +24,6 @@ class Weapon extends CustomModel{
         allowNull: false,
         defaultValue: 0
       },
-    level: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
-    rarity: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "rarity"
-    },
     rareBuff: {
       type: DataTypes.STRING,
       allowNull: false,

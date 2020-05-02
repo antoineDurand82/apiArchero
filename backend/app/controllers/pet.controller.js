@@ -14,8 +14,6 @@ exports.create = (req, res) => {
   // Create a Tutorial
   const pet = {
     fullName: req.body.fullName,
-    level: req.body.level,
-    rarity: req.body.rarity,
     commonBuff: req.body.commonBuff,
     rareBuff: req.body.rareBuff,
     epicBuff: req.body.epicBuff,

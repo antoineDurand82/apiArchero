@@ -14,7 +14,6 @@ exports.create = (req, res) => {
   // Create a Tutorial
   const talent = {
     fullName: req.body.fullName,
-    level: req.body.level,
     buff: req.body.buff,
     linkImage: req.body.linkImage,
   };

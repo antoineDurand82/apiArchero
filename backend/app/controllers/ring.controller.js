@@ -15,8 +15,6 @@ exports.create = (req, res) => {
   const ring = {
     fullName: req.body.fullName,
     ringBuff: req.body.ringBuff,
-    level: req.body.level,
-    rarity: req.body.rarity,
     commonBuff: req.body.commonBuff,
     rareBuff: req.body.rareBuff,
     epicBuff: req.body.epicBuff,

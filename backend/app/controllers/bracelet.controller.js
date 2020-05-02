@@ -15,8 +15,6 @@ exports.create = (req, res) => {
   const bracelet = {
     fullName: req.body.fullName,
     attack: req.body.attack,
-    level: req.body.level,
-    rarity: req.body.rarity,
     commonBuff: req.body.commonBuff,
     rareBuff: req.body.rareBuff,
     epicBuff: req.body.epicBuff,

@@ -14,16 +14,6 @@ class Pet extends CustomModel{
       allowNull: false,
       defaultValue: "pet"
     },
-    level: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
-    rarity: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "rarity"
-    },
     commonBuff: {
       type: DataTypes.STRING,
       allowNull: false,

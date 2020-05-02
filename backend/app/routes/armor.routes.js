@@ -3,25 +3,22 @@ module.exports = app => {
   
     var router = require("express").Router();
   
-    // Create a new Tutorial
+    // Create a new Armor
     router.post("/", armors.create);
   
     // Retrieve all armors
     router.get("/", armors.findAll);
   
-    // Retrieve all published armors
-    router.get("/published", armors.findAllPublished);
-  
-    // Retrieve a single Tutorial with id
+    // Retrieve a single Armor with id
     router.get("/:id", armors.findOne);
   
-    // Update a Tutorial with id
+    // Update a Armor with id
     router.put("/:id", armors.update);
   
-    // Delete a Tutorial with id
+    // Delete a Armor with id
     router.delete("/:id", armors.delete);
   
-    // Create a new Tutorial
+    // Create a new Armor
     router.delete("/", armors.deleteAll);
   
     app.use('/api/armors', router);

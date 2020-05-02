@@ -19,11 +19,6 @@ class Hero extends CustomModel{
       allowNull: false,
       defaultValue: 0
     },
-    level: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
     maxHp: {
       type: DataTypes.INTEGER,
       allowNull: false,
