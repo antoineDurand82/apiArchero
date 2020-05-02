@@ -2,8 +2,26 @@
 
 import { Model } from '@vuex-orm/core'
 
+import Ring from './ring.model'
+import Armor from './armor.model'
+import Bracelet from './bracelet.model'
+import Hero from './hero.model'
+import Locket from './locket.model'
+import Pet from './pet.model'
+import Talent from './talent.model'
+import Weapon from './weapon.model'
+
+import UserRing from './userRing.model'
+import UserArmor from './userArmor.model'
+import UserBracelet from './userBracelet.model'
+import UserHero from './userHero.model'
+import UserLocket from './userLocket.model'
+import UserPet from './userPet.model'
+import UserTalent from './userTalent.model'
+import UserWeapon from './userWeapon.model'
+
 export default class User extends Model {
-  
+
   static entity = 'users'
   static primaryKey = 'id'
 

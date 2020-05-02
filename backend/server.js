@@ -6,6 +6,10 @@ const app = express();
 
 const db = require("./app/models");
 
+
+db.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});
 var corsOptions = {
   origin: "http://localhost:8081"
 };

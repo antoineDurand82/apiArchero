@@ -13,14 +13,14 @@ export default class Locket extends Model {
   static fields () {
     return {
       id: this.number(0),
-      fullName: this.string(''),
+      fullName: this.string('locket'),
       maxHp: this.number(0),
-      commonBuff: this.string(''),
-      rareBuff: this.string(''),
-      epicBuff: this.string(''),
-      perfectEpicBuff: this.string(''),
-      legendaryBuff: this.string(''),
-      ancientLegendaryBuff: this.string(''),
+      commonBuff: this.string('commonBuff'),
+      rareBuff: this.string('rareBuff'),
+      epicBuff: this.string('epicBuff'),
+      perfectEpicBuff: this.string('perfectEpicBuff'),
+      legendaryBuff: this.string('legendaryBuff'),
+      ancientLegendaryBuff: this.string('ancientLegendaryBuff'),
       linkImage: this.string('@/assets/images'),
       user: this.belongsToMany(User, UserLocket, 'locket_id', 'user_id'),
     }
