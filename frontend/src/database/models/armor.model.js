@@ -6,8 +6,9 @@ import UserArmor from './userArmor.model'
 
 export default class Armor extends Model {
   
-  static entity = 'armor'
+  static entity = 'armors'
   static primaryKey = 'id'
+  static apiPath = 'armors'
 
   static fields () {
     return {

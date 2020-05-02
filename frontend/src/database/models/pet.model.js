@@ -7,8 +7,9 @@ import UserPet from './userPet.model'
 
 export default class Pet extends Model {
   
-  static entity = 'pet'
+  static entity = 'pets'
   static primaryKey = 'id'
+  static apiPath = 'pets'
 
   static fields () {
     return {

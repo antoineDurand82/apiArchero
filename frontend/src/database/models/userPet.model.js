@@ -4,8 +4,9 @@ import { Model } from '@vuex-orm/core'
 
 export default class UserPet extends Model {
   
-  static entity = 'userPet'
+  static entity = 'userPets'
   static primaryKey = 'id'
+  static apiPath = 'userPets'
 
   static fields () {
     return {

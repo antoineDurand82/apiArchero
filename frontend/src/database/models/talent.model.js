@@ -7,8 +7,9 @@ import UserTalent from './userTalent.model'
 
 export default class Talent extends Model {
   
-  static entity = 'talent'
+  static entity = 'talents'
   static primaryKey = 'id'
+  static apiPath = 'talents'
 
   static fields () {
     return {

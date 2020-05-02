@@ -5,8 +5,9 @@ import { Model } from '@vuex-orm/core'
 
 export default class UpgradeRequirement extends Model {
   
-  static entity = 'upgradeRequirement'
+  static entity = 'upgradeRequirements'
   static primaryKey = 'id'
+  static apiPath = 'upgradeRequirements'
 
   static fields () {
     return {

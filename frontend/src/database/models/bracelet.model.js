@@ -7,8 +7,9 @@ import UserBracelet from './userBracelet.model'
 
 export default class Bracelet extends Model {
   
-  static entity = 'bracelet'
+  static entity = 'bracelets'
   static primaryKey = 'id'
+  static apiPath = 'bracelets'
 
   static fields () {
     return {
