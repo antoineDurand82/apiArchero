@@ -13,14 +13,14 @@ export default class Bracelet extends Model {
   static fields () {
     return {
       id: this.number(0),
-      fullName: this.string(''),
+      fullName: this.string('bracelet'),
       attack: this.number(0),
-      commonBuff: this.string(''),
-      rareBuff: this.string(''),
-      epicBuff: this.string(''),
-      perfectEpicBuff: this.string(''),
-      legendaryBuff: this.string(''),
-      ancientLegendaryBuff: this.string(''),
+      commonBuff: this.string('commonBuff'),
+      rareBuff: this.string('rareBuff'),
+      epicBuff: this.string('epicBuff'),
+      perfectEpicBuff: this.string('perfectEpicBuff'),
+      legendaryBuff: this.string('legendaryBuff'),
+      ancientLegendaryBuff: this.string('ancientLegendaryBuff'),
       linkImage: this.string('@/assets/images'),
       user: this.belongsToMany(User, UserBracelet, 'bracelet_id', 'user_id'),
     }

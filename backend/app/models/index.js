@@ -55,8 +55,8 @@ const db = new Database([
   UpgradeRequirement
 ], Sequelize, dbConnection)
 
-// db.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
+db.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});
 
 module.exports = db;
