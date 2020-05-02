@@ -1,6 +1,10 @@
 .navbar {
   @apply flex items-center justify-between flex-wrap bg-teal-500 p-8 fixed w-full;
-  &-logo {
+  &-img {
+    @apply w-8;
+    fill: white;
+  }
+  &-div-logo {
     @apply flex items-center flex-shrink-0 text-white mr-6;
   }
   &-menu-button {
