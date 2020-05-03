@@ -1,11 +1,11 @@
 // Weapon Model
 
-import { Model } from '@vuex-orm/core'
+import CustomModel from './customModel.model'
 
 import User from './user.model'
 import UserWeapon from './userWeapon.model'
 
-export default class Weapon extends Model {
+export default class Weapon extends CustomModel {
   
   static entity = 'weapons'
   static primaryKey = 'id'
@@ -13,7 +13,7 @@ export default class Weapon extends Model {
 
   static fields () {
     return {
-      id: this.number(0),
+      id: this.number(null),
       fullName: this.string('weapon'),
       attack: this.number(0),
       attackSpeed: this.number(0),

@@ -1,8 +1,8 @@
 // UserHero Model
 
-import { Model } from '@vuex-orm/core'
+import CustomModel from './customModel.model'
 
-export default class UserHero extends Model {
+export default class UserHero extends CustomModel {
   
   static entity = 'userHeroes'
   static primaryKey = 'id'
@@ -10,7 +10,7 @@ export default class UserHero extends Model {
 
   static fields () {
     return {
-      id: this.number(0),
+      id: this.number(null),
       level: this.number(0),
     }
   }

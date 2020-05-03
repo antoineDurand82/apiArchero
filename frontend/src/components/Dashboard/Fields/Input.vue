@@ -14,7 +14,7 @@ export default {
       type: String,
       default: ''
     },
-    val: String
+    val: [String, Number]
   },
   data: () => ({
     value: ''
