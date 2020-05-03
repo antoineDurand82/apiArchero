@@ -1,8 +1,8 @@
 // UserArmor Model
 
-import { Model } from '@vuex-orm/core'
+import CustomModel from './customModel.model'
 
-export default class UserArmor extends Model {
+export default class UserArmor extends CustomModel {
   
   static entity = 'userArmors'
   static primaryKey = 'id'
@@ -10,7 +10,7 @@ export default class UserArmor extends Model {
 
   static fields () {
     return {
-      id: this.number(0),
+      id: this.number(null),
       level: this.number(0),
       rarity: this.string('Common'),
     }

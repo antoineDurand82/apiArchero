@@ -2,7 +2,7 @@ import axios from 'axios'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VuexORM from '@vuex-orm/core'
-import VuexORMRest from 'vuex-orm-rest'
+import VuexORMAxios from '@vuex-orm/plugin-axios'
 
 import Datatable from './datatable'
 import User from './models/user.model'
@@ -24,12 +24,11 @@ import UserTalent from './models/userTalent.model'
 import UserWeapon from './models/userWeapon.model'
 import Weapon from './models/weapon.model'
 
-const client = axios.create({
+Vue.use(Vuex)
+VuexORM.use(VuexORMAxios, { 
+  axios,
   baseURL: 'http://localhost:3000/api/'
 })
-
-Vue.use(Vuex)
-VuexORM.use(VuexORMRest, { client })
 
 // Create a new instance of Database.
 const database = new VuexORM.Database()

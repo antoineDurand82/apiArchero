@@ -1,8 +1,8 @@
 // UserTalent Model
 
-import { Model } from '@vuex-orm/core'
+import CustomModel from './customModel.model'
 
-export default class UserTalent extends Model {
+export default class UserTalent extends CustomModel {
   
   static entity = 'userTalents'
   static primaryKey = 'id'
@@ -10,7 +10,7 @@ export default class UserTalent extends Model {
 
   static fields () {
     return {
-      id: this.number(0),
+      id: this.number(null),
       level: this.number(0),
     }
   }

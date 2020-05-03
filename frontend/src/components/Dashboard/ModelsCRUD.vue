@@ -1,46 +1,85 @@
 <template>
   <div>
     <h2>{{ title }} List</h2>
-    <DataTable primary-key="id" :raw-data="models" :columns="columns" @delete="deleteData" :form="form" @submit="submitForm">
-
+    <DataTable 
+      primary-key="id" 
+      :raw-data="models" 
+      :columns="columns" 
+      :form="form" 
+      :entity="entityClass" 
+      :loading="isLoading" 
+      :error="error"
+      @delete="deleteData" 
+      @submit="submitForm" 
+    >
     </DataTable>
   </div>
 </template>
 
 <script>
+import { map } from 'lodash'
+
 export default {
   components: {
     DataTable: () => import('@/components/Dashboard/DataTable'),
   },
   async created() {
-    await this.fetchAll();
+    this.isLoading = true
+    try {
+      await this.fetchAll();
+    } catch (error) {
+      this.error = error.message
+    }
+    this.isLoading = false
   },
   watch: {
-    entityName() {
-      this.fetchAll()
+    async entityName() {
+      this.isLoading = true
+      try {
+        await this.fetchAll();
+      } catch (error) {
+        this.error = error.message
+      }
+      this.isLoading = false
     }
   },
+  data: () => ({
+    isLoading: false,
+    error: null
+  }),
   methods: {
     async deleteData(models) {
-      for (let i = 0; i < models.length; i++) {
-        const model = models[i];
-        await model.destroy()
+      this.isLoading = true
+      try {
+        await this.entityClass.destroyAll(map(models, 'id'))
+        await this.fetchAll()
+      } catch (error) {
+        this.error = error.message
       }
-      await this.$store.$db().model(this.entity).fetchAll()
+      this.isLoading = false
     },
     async submitForm(model) {
-      const entity = this.$store.$db().model(this.entity)
-      if(!model.id) await (new entity(model)).save()
-      else await model.replace()
-      this.$store.$db().model(this.entity).fetchAll()
+      this.isLoading = true
+      try {
+        if(!model.id) await this.entityClass.save(model)
+        else await this.entityClass.replace(model.id, model)
+        await this.fetchAll()
+      } catch (error) {
+        this.error = error.message
+      }
+      this.isLoading = false
     },
     async fetchAll() {
-      return this.$store.$db().model(this.entity).fetchAll()
+      this.error = null
+      if(this.$store.state.datatable[this.entity].beforeLoad && typeof this.$store.state.datatable[this.entity].beforeLoad === 'function') {
+        await this.$store.state.datatable[this.entity].beforeLoad()
+      }
+      await this.entityClass.fetchAll()
     }
   },
   computed: {
     models() {
-      return this.$store.$db().model(this.entity).all()
+      return this.entityClass.query().withAll().get()
     },
     columns() {
       return this.$store.state.datatable[this.entity].columns
@@ -56,6 +95,9 @@ export default {
       }
       name = name[0].toUpperCase() + name.slice(1)
       return name
+    },
+    entityClass() {
+      return this.$store.$db().model(this.entity) 
     },
     entity() {
       let name = this.entityName

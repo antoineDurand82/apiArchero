@@ -1,11 +1,11 @@
 // Talent Model
 
-import { Model } from '@vuex-orm/core'
+import CustomModel from './customModel.model'
 
 import User from './user.model'
 import UserTalent from './userTalent.model'
 
-export default class Talent extends Model {
+export default class Talent extends CustomModel {
   
   static entity = 'talents'
   static primaryKey = 'id'
@@ -13,7 +13,7 @@ export default class Talent extends Model {
 
   static fields () {
     return {
-      id: this.number(0),
+      id: this.number(null),
       fullName: this.string('talent'),
       buff: this.string('buff'),
       linkImage: this.string('@/assets/images'),

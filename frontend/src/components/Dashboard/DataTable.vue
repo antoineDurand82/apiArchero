@@ -20,7 +20,13 @@
 				</select>
 			</div>
 		</div>
-		<table class="w-full">
+		<div v-if="loading" class="w-full flex items-center justify-center">
+			<IconLoader :width="40" :height="40" fill="#38b2ac"/>
+		</div>
+		<div v-else-if="error" class="w-full flex items-center justify-center text-red-700">
+			{{ error }}
+		</div>
+		<table class="w-full" v-else>
 			<thead>
 				<tr class="text-left bg-gray-100 text-gray-600 tracking-wider uppercase text-xs font-bold">
 					<th class="py-2 px-3 border-b border-gray-200">
@@ -87,7 +93,7 @@
 				</span>
 			</div>
 		</div>
-    <EditModal :model="editingModel" ref="editModal" :form="form" @submit="submitForm" />
+    <EditModal :model="editingModel" ref="editModal" :form="form" @submit="submitForm" :entity="entity" />
 	</div>
 </template>
 
@@ -96,7 +102,8 @@ import { chunk, map, isEqual } from 'lodash'
 
 export default {
 	components: {
-    EditModal: () => import('@/components/Dashboard/EditModal'),
+		EditModal: () => import('@/components/Dashboard/EditModal'),
+		IconLoader: () => import('@/components/Icon/Loader')
 	},
 	props: {
 		perPage: {
@@ -120,6 +127,16 @@ export default {
 		form: {
 			type: Object,
 			required: true
+		},
+		entity: {
+			default: null
+		},
+		loading: {
+			type: Boolean,
+			default: false
+		},
+		error: {
+			default: null
 		}
 	},
   data: () => ({
@@ -138,7 +155,7 @@ export default {
 		},
 		isAllSelected() {
 			return isEqual(this.selected, this.data.data)
-		}
+		},
 	},
 	methods: {
 		getIndexForArray(index, array) {
@@ -169,9 +186,10 @@ export default {
 			this.$emit('submit', model)
 		},
 		openEditModal(model = undefined) {
-			this.editingModel = model
+			const entity = this.entity
+			this.editingModel = model ? entity ? new entity(model) : {...model} : undefined
 			this.$refs.editModal.toggle(true)
-		}
+		},
 	}
 }
 </script>

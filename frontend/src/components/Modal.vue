@@ -4,7 +4,7 @@
       <div class="modal-background" @click="toggle(false)">
       </div>
       <div class="modal-container" :style="'max-width: ' + maxWidth + ';'">
-        <div :class="'modal-content bg-white rounded h-full w-full' + additionalClasses.join(' ')">
+        <div :class="'modal-content bg-white rounded w-full flex flex-col' + additionalClasses.join(' ')">
           <header v-if="!noHeader" class="text-center p-2 border-b border-gray-400 flex items-center justify-between">
             <h2 class="mx-auto text-2xl font-bold">
               <slot name="header">
@@ -15,7 +15,7 @@
               <i class="fas fa-times"></i>
             </button>
           </header>
-          <div class="p-2">
+          <div class="p-2 overflow-auto h-full">
             <slot name="content">
               Content
             </slot>
@@ -86,7 +86,11 @@ export default {
   }
 
   &-container {
-    @apply w-full left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2 absolute p-2;
+    @apply w-full left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2 absolute p-2 h-full;
+  }
+
+  &-content {
+    max-height: 100%;
   }
 }
 

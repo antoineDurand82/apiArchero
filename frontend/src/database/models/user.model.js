@@ -1,6 +1,6 @@
 // User Model
 
-import { Model } from '@vuex-orm/core'
+import CustomModel from './customModel.model'
 
 import Ring from './ring.model'
 import Armor from './armor.model'
@@ -20,7 +20,9 @@ import UserPet from './userPet.model'
 import UserTalent from './userTalent.model'
 import UserWeapon from './userWeapon.model'
 
-export default class User extends Model {
+import { map } from 'lodash'
+
+export default class User extends CustomModel {
 
   static entity = 'users'
   static primaryKey = 'id'
@@ -28,7 +30,7 @@ export default class User extends Model {
 
   static fields () {
     return {
-      id: this.number(0),
+      id: this.number(null),
       maxHp: this.number(0),
       attack: this.number(0),
       attackSpeed: this.number(0),
@@ -41,14 +43,46 @@ export default class User extends Model {
       criticalDamageChance: this.number(0),
       criticalDamage: this.number(0),
       angelDoubleHealingChance: this.number(0),
-      ring: this.belongsToMany(Ring, UserRing, 'user_id', 'ring_id'),
+      rings: this.belongsToMany(Ring, UserRing, 'user_id', 'ring_id'),
       armor: this.belongsToMany(Armor, UserArmor, 'user_id', 'armor_id'),
       bracelet: this.belongsToMany(Bracelet, UserBracelet, 'user_id', 'bracelet_id'),
       hero: this.belongsToMany(Hero, UserHero, 'user_id', 'hero_id'),
       locket: this.belongsToMany(Locket, UserLocket, 'user_id', 'locket_id'),
-      pet: this.belongsToMany(Pet, UserPet, 'user_id', 'pet_id'),
-      talent: this.belongsToMany(Talent, UserTalent, 'user_id', 'talent_id'),
+      pets: this.belongsToMany(Pet, UserPet, 'user_id', 'pet_id'),
+      talents: this.belongsToMany(Talent, UserTalent, 'user_id', 'talent_id'),
       weapon: this.belongsToMany(Weapon, UserWeapon, 'user_id', 'weapon_id'),
     }
+  }
+
+  get ringsId() {
+    return map(this.rings, ['ring_id'])
+  }
+
+  get armorId() {
+    return map(this.armor, ['armor_id'])
+  }
+
+  get braceletId() {
+    return map(this.bracelet, ['bracelet_id'])
+  }
+
+  get heroId() {
+    return map(this.hero, ['hero_id'])
+  }
+
+  get locketId() {
+    return map(this.locket, ['locket_id'])
+  }
+
+  get weaponId() {
+    return map(this.weapon, ['weapon_id'])
+  }
+
+  get petsId() {
+    return map(this.pets, ['pet_id'])
+  }
+
+  get talentsId() {
+    return map(this.talents, ['talent_id'])
   }
 }

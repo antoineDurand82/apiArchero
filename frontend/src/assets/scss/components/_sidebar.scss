@@ -6,7 +6,7 @@
     @apply py-3;
     &-link {
       @apply block text-center text-lg font-medium border rounded text-white border-white px-4 py-2;
-      &:hover {
+      &:hover, &.active {
         @apply border-transparent text-teal-600 opacity-75 bg-white;
       }
     }
