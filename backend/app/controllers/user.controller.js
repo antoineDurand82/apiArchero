@@ -118,7 +118,8 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
   try { 
-    const updatedUser = await User.update(req.body, {where: { id: id }})
+    await User.update(req.body, {where: { id: id }})
+    const updatedUser = User.findByPk(id)
     updatedUser.setArmors([])
     updatedUser.setBracelets([])
     updatedUser.setHeroes([])
@@ -216,19 +217,5 @@ exports.deleteAll = (req, res) => {
           err.message || "Some error occurred while removing all users."
       });
     });
-  
-};
-
-exports.findAllPublished = (req, res) => {
-  User.findAll({ where: { published: true } })
-  .then(data => {
-    res.send(data);
-  })
-  .catch(err => {
-    res.status(500).send({
-      message:
-        err.message || "Some error occurred while retrieving users."
-    });
-  });
   
 };
