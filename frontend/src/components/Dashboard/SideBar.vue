@@ -19,7 +19,7 @@ export default {
   }),
   computed: {
     links() {
-      return map(filter(Object.keys(this.$store.state.entities), key => key !== '$name'), model => {
+      return map(filter(Object.keys(this.$store.state.entities), key => ['$name', 'userArmors', 'userRings', 'userHeroes', 'userTalents', 'userBracelets', 'userLockets', 'userPets', 'userWeapons'].indexOf(key) === -1 ), model => {
         let name = model
         let route = model
         while(name.search(/[a-z][A-Z]/) !== -1) {

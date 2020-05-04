@@ -1,8 +1,14 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require('path');
+const cookieParser = require('cookie-parser');
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'app/public')));
 
 const db = require("./app/models");
 
@@ -10,7 +16,7 @@ const db = require("./app/models");
 db.sync({ force: true }).then(() => {
  console.log("Drop and re-sync db.");
 });
-var corsOptions = {
+const corsOptions = {
   origin: "http://localhost:8080"
 };
 

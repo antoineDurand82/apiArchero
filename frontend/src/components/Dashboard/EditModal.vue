@@ -120,7 +120,7 @@ export default {
       return ['text', 'number', 'email'].indexOf(type) !== -1 ? 'input' : type
     },
     getDefaultValue(field) {
-      return field.default !== 'undefined' ? field.default()
+      return field.default !== undefined ? field.default()
         : field.type === 'number'
           ? 0
           : field.type === 'select'
