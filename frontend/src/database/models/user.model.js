@@ -1,6 +1,5 @@
 // User Model
-
-import { Model } from '@vuex-orm/core'
+import CustomModel from './customModel.model'
 
 import Ring from './ring.model'
 import Armor from './armor.model'
@@ -20,19 +19,22 @@ import UserPet from './userPet.model'
 import UserTalent from './userTalent.model'
 import UserWeapon from './userWeapon.model'
 
-export default class User extends Model {
+import { map } from 'lodash'
+
+export default class User extends CustomModel {
 
   static entity = 'users'
   static primaryKey = 'id'
+  static apiPath = 'users'
 
   static fields () {
     return {
-      id: this.number(0),
+      id: this.number(null),
       maxHp: this.number(0),
       attack: this.number(0),
       attackSpeed: this.number(0),
       dodgeRate: this.number(0),
-      damagaResistance: this.number(0),
+      damageResistance: this.number(0),
       healingRedHearts: this.number(0),
       projectileResistance: this.number(0),
       collisionResistance: this.number(0),
@@ -40,14 +42,46 @@ export default class User extends Model {
       criticalDamageChance: this.number(0),
       criticalDamage: this.number(0),
       angelDoubleHealingChance: this.number(0),
-      ring: this.belongsToMany(Ring, UserRing, 'user_id', 'ring_id'),
-      armor: this.belongsToMany(Armor, UserArmor, 'user_id', 'armor_id'),
-      bracelet: this.belongsToMany(Bracelet, UserBracelet, 'user_id', 'bracelet_id'),
-      hero: this.belongsToMany(Hero, UserHero, 'user_id', 'hero_id'),
-      locket: this.belongsToMany(Locket, UserLocket, 'user_id', 'locket_id'),
-      pet: this.belongsToMany(Pet, UserPet, 'user_id', 'pet_id'),
-      talent: this.belongsToMany(Talent, UserTalent, 'user_id', 'talent_id'),
-      weapon: this.belongsToMany(Weapon, UserWeapon, 'user_id', 'weapon_id'),
+      rings: this.belongsToMany(Ring, UserRing, 'userId', 'ringId'),
+      armors: this.belongsToMany(Armor, UserArmor, 'userId', 'armorId'),
+      bracelets: this.belongsToMany(Bracelet, UserBracelet, 'userId', 'braceletId'),
+      heroes: this.belongsToMany(Hero, UserHero, 'userId', 'heroId'),
+      lockets: this.belongsToMany(Locket, UserLocket, 'userId', 'locketId'),
+      pets: this.belongsToMany(Pet, UserPet, 'userId', 'petId'),
+      talents: this.belongsToMany(Talent, UserTalent, 'userId', 'talentId'),
+      weapons: this.belongsToMany(Weapon, UserWeapon, 'userId', 'weaponId'),
     }
+  }
+
+  get ringsId() {
+    return map(this.rings, ['ringId'])
+  }
+
+  get armorsId() {
+    return map(this.armors, ['armorId'])
+  }
+
+  get braceletsId() {
+    return map(this.bracelets, ['braceletId'])
+  }
+
+  get heroesId() {
+    return map(this.heroes, ['heroId'])
+  }
+
+  get locketsId() {
+    return map(this.lockets, ['locketId'])
+  }
+
+  get weaponsId() {
+    return map(this.weapons, ['weaponId'])
+  }
+
+  get petsId() {
+    return map(this.pets, ['petId'])
+  }
+
+  get talentsId() {
+    return map(this.talents, ['talentId'])
   }
 }

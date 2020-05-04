@@ -1,17 +1,20 @@
 // UserPet Model
 
-import { Model } from '@vuex-orm/core'
+import CustomModel from './customModel.model'
 
-export default class UserPet extends Model {
+export default class UserPet extends CustomModel {
   
-  static entity = 'userPet'
+  static entity = 'userPets'
   static primaryKey = 'id'
+  static apiPath = 'userPets'
 
   static fields () {
     return {
-      id: this.number(0),
+      id: this.number(null),
       level: this.number(0),
       rarity: this.string('Common'),
+      petId: this.number(null),
+      userId: this.number(null),
     }
   }
 }

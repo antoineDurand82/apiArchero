@@ -7,9 +7,9 @@ const app = express();
 const db = require("./app/models");
 
 
-// db.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
+db.sync({ force: true }).then(() => {
+ console.log("Drop and re-sync db.");
+});
 var corsOptions = {
   origin: "http://localhost:8080"
 };
@@ -23,9 +23,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
-});
 require("./app/routes/armor.routes")(app);
 require("./app/routes/bracelet.routes")(app);
 require("./app/routes/hero.routes")(app);

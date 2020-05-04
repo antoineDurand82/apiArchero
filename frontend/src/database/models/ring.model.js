@@ -1,18 +1,19 @@
 // Ring Model
 
-import { Model } from '@vuex-orm/core'
+import CustomModel from './customModel.model'
 
 import User from './user.model'
 import UserRing from './userRing.model'
 
-export default class Ring extends Model {
+export default class Ring extends CustomModel {
   
-  static entity = 'ring'
+  static entity = 'rings'
   static primaryKey = 'id'
+  static apiPath = 'rings'
 
   static fields () {
     return {
-      id: this.number(0),
+      id: this.number(null),
       fullName: this.string('fullName'),
       ringBuff: this.string('ringBuff'),
       commonBuff: this.string('commonBuff'),

@@ -1,6 +1,5 @@
 const db = require("../models");
 const User = db.user;
-const Op = db.Sequelize.Op;
 
 
 exports.create = async (req, res) => {
@@ -22,51 +21,57 @@ exports.create = async (req, res) => {
     angelDoubleHealingChance: req.body.angelDoubleHealingChance
   };
 
-
-
   // Save User in the database
 
   try {
     const createdUser =  await User.create(user)
     if (Array.isArray(req.body.armors)) {
-      req.body.armors.forEach(armor => {
-        createdUser.addArmor(armor.armorId, {through: {level: armor.level, rarity: armor.rarity}})
-      });
+      for (let i = 0; i < req.body.armors.length; i++) {
+        const armor = req.body.armors[i];
+        await createdUser.addArmor(armor.armorId, {through: {level: armor.level, rarity: armor.rarity}})
+      }
     };
     if (Array.isArray(req.body.bracelets)) {
-      req.body.bracelets.forEach(bracelet => {
-        createdUser.addBracelet(bracelet.braceletId, {through: {level: bracelet.level, rarity: bracelet.rarity}})
-      });
+      for (let i = 0; i < req.body.bracelets.length; i++) {
+        const bracelet = req.body.bracelets[i];
+        await createdUser.addBracelet(bracelet.braceletId, {through: {level: bracelet.level, rarity: bracelet.rarity}})
+      }
     };
     if (Array.isArray(req.body.heroes)) {
-      req.body.heroes.forEach(hero => {
-        createdUser.addHero(hero.heroId, {through: {level: hero.level}})
-      });
+      for (let i = 0; i < req.body.heroes.length; i++) {
+        const hero = req.body.heroes[i];
+        await createdUser.addHero(hero.heroId, {through: {level: hero.level}})
+      }
     };
     if (Array.isArray(req.body.lockets)) {
-      req.body.lockets.forEach(locket => {
-        createdUser.addLocket(locket.locketId, {through: {level: locket.level, rarity: locket.rarity}})
-      });
+      for (let i = 0; i < req.body.lockets.length; i++) {
+        const locket = req.body.lockets[i];
+        await createdUser.addLocket(locket.locketId, {through: {level: locket.level, rarity: locket.rarity}})
+      }
     };
     if (Array.isArray(req.body.pets)) {
-      req.body.pets.forEach(pet => {
-        createdUser.addPet(pet.petId, {through: {level: pet.level, rarity: pet.rarity}})
-      });
+      for (let i = 0; i < req.body.pets.length; i++) {
+        const pet = req.body.pets[i];
+        await createdUser.addPet(pet.petId, {through: {level: pet.level, rarity: pet.rarity}})
+      }
     };
     if (Array.isArray(req.body.rings)) {
-      req.body.rings.forEach(ring => {
-        createdUser.addRing(ring.ringId, {through: {level: ring.level, rarity: ring.rarity}})
-      });
+      for (let i = 0; i < req.body.rings.length; i++) {
+        const ring = req.body.rings[i];
+        await createdUser.addRing(ring.ringId, {through: {level: ring.level, rarity: ring.rarity}})
+      }
     };
     if (Array.isArray(req.body.talents)) {
-      req.body.talents.forEach(talent => {
-        createdUser.addTalent(talent.talentId, {through: {level: talent.level}})
-      });
+      for (let i = 0; i < req.body.talents.length; i++) {
+        const talent = req.body.talents[i];
+        await createdUser.addTalent(talent.talentId, {through: {level: talent.level}})
+      }
     };
     if (Array.isArray(req.body.weapons)) {
-      req.body.weapons.forEach(weapon => {
-        createdUser.addWeapon(weapon.weaponId, {through: {level: weapon.level, rarity: weapon.rarity}})
-      });
+      for (let i = 0; i < req.body.weapons.length; i++) {
+        const weapon = req.body.weapons[i];
+        await createdUser.addWeapon(weapon.weaponId, {through: {level: weapon.level, rarity: weapon.rarity}})
+      }
     };
     
     res.status(200).send(createdUser)
@@ -76,18 +81,12 @@ exports.create = async (req, res) => {
       message:
         error.message || "Some error occurred while creating the User."})
   }
-
-
-  
 };
 
 
 
 exports.findAll = (req, res) => {
-  const id = req.query.id;
-  var condition = id ? { id: { [Op.like]: `%${id}%` } } : null;
-
-  User.findAll({ where: condition })
+  User.findAll()
     .then(data => {
       res.send(data);
     })
@@ -112,61 +111,68 @@ exports.findOne = (req, res) => {
         message: "Error retrieving User with id=" + id
       });
     });
-  
 };
 
-exports.update = (req, res) => {
+exports.update = async (req, res) => {
   const id = req.params.id;
   try { 
     await User.update(req.body, {where: { id: id }})
-    const updatedUser = User.findByPk(id)
-    updatedUser.setArmors([])
-    updatedUser.setBracelets([])
-    updatedUser.setHeroes([])
-    updatedUser.setLockets([])
-    updatedUser.setPets([])
-    updatedUser.setRings([])
-    updatedUser.setTalents([])
-    updatedUser.setWeapons([])
+    const updatedUser = await User.findByPk(id)
+    await updatedUser.setArmors([])
+    await updatedUser.setBracelets([])
+    await updatedUser.setHeros([])
+    await updatedUser.setLockets([])
+    await updatedUser.setPets([])
+    await updatedUser.setRings([])
+    await updatedUser.setTalents([])
+    await updatedUser.setWeapons([])
     if (Array.isArray(req.body.armors)) {
-      req.body.armors.forEach(armor => {
-        updatedUser.addArmor(armor.armorId, {through: {level: armor.level, rarity: armor.rarity}})
-      });
+      for (let i = 0; i < req.body.armors.length; i++) {
+        const armor = req.body.armors[i];
+        await updatedUser.addArmor(armor.armorId, {through: {level: armor.level, rarity: armor.rarity}})
+      }
     };
     if (Array.isArray(req.body.bracelets)) {
-      req.body.bracelets.forEach(bracelet => {
-        updatedUser.addBracelet(bracelet.braceletId, {through: {level: bracelet.level, rarity: bracelet.rarity}})
-      });
+      for (let i = 0; i < req.body.bracelets.length; i++) {
+        const bracelet = req.body.bracelets[i];
+        await updatedUser.addBracelet(bracelet.braceletId, {through: {level: bracelet.level, rarity: bracelet.rarity}})
+      }
     };
     if (Array.isArray(req.body.heroes)) {
-      req.body.heroes.forEach(hero => {
-        updatedUser.addHero(hero.heroId, {through: {level: hero.level}})
-      });
+      for (let i = 0; i < req.body.heroes.length; i++) {
+        const hero = req.body.heroes[i];
+        await updatedUser.addHero(hero.heroId, {through: {level: hero.level}})
+      }
     };
     if (Array.isArray(req.body.lockets)) {
-      req.body.lockets.forEach(locket => {
-        updatedUser.addLocket(locket.locketId, {through: {level: locket.level, rarity: locket.rarity}})
-      });
+      for (let i = 0; i < req.body.lockets.length; i++) {
+        const locket = req.body.lockets[i];
+        await updatedUser.addLocket(locket.locketId, {through: {level: locket.level, rarity: locket.rarity}})
+      }
     };
     if (Array.isArray(req.body.pets)) {
-      req.body.pets.forEach(pet => {
-        updatedUser.addPet(pet.petId, {through: {level: pet.level, rarity: pet.rarity}})
-      });
+      for (let i = 0; i < req.body.pets.length; i++) {
+        const pet = req.body.pets[i];
+        await updatedUser.addPet(pet.petId, {through: {level: pet.level, rarity: pet.rarity}})
+      }
     };
     if (Array.isArray(req.body.rings)) {
-      req.body.rings.forEach(ring => {
-        updatedUser.addRing(ring.ringId, {through: {level: ring.level, rarity: ring.rarity}})
-      });
+      for (let i = 0; i < req.body.rings.length; i++) {
+        const ring = req.body.rings[i];
+        await updatedUser.addRing(ring.ringId, {through: {level: ring.level, rarity: ring.rarity}})
+      }
     };
     if (Array.isArray(req.body.talents)) {
-      req.body.talents.forEach(talent => {
-        updatedUser.addTalent(talent.talentId, {through: {level: talent.level}})
-      });
+      for (let i = 0; i < req.body.talents.length; i++) {
+        const talent = req.body.talents[i];
+        await updatedUser.addTalent(talent.talentId, {through: {level: talent.level}})
+      }
     };
     if (Array.isArray(req.body.weapons)) {
-      req.body.weapons.forEach(weapon => {
-        updatedUser.addWeapon(weapon.weaponId, {through: {level: weapon.level, rarity: weapon.rarity}})
-      });
+      for (let i = 0; i < req.body.weapons.length; i++) {
+        const weapon = req.body.weapons[i];
+        await updatedUser.addWeapon(weapon.weaponId, {through: {level: weapon.level, rarity: weapon.rarity}})
+      }
     };
     res.status(200).send(updatedUser)
   } catch (error) {

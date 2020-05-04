@@ -6,8 +6,5 @@ module.exports = app => {
     // Retrieve all userBracelets
     router.get("/", userBracelets.findAll);
   
-    // Retrieve a single UserBracelet with id
-    router.get("/:id", userBracelets.findOne);
-  
     app.use('/api/userBracelets', router);
   };

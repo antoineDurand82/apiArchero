@@ -6,8 +6,5 @@ module.exports = app => {
     // Retrieve all userPets
     router.get("/", userPets.findAll);
   
-    // Retrieve a single UserPet with id
-    router.get("/:id", userPets.findOne);
-  
     app.use('/api/userPets', router);
   };

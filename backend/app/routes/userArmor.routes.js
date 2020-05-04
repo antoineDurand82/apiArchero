@@ -6,8 +6,5 @@ module.exports = app => {
     // Retrieve all userArmors
     router.get("/", userArmors.findAll);
   
-    // Retrieve a single UserArmor with id
-    router.get("/:id", userArmors.findOne);
-  
     app.use('/api/userArmors', router);
   };

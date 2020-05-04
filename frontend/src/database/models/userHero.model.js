@@ -1,16 +1,19 @@
 // UserHero Model
 
-import { Model } from '@vuex-orm/core'
+import CustomModel from './customModel.model'
 
-export default class UserHero extends Model {
+export default class UserHero extends CustomModel {
   
-  static entity = 'userHero'
+  static entity = 'userHeroes'
   static primaryKey = 'id'
+  static apiPath = 'userHeroes'
 
   static fields () {
     return {
-      id: this.number(0),
+      id: this.number(null),
       level: this.number(0),
+      heroId: this.number(null),
+      userId: this.number(null),
     }
   }
 }

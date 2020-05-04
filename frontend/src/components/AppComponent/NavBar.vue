@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="navbar-div-logo">
       <IconBow class="navbar-img"/>
-      <span class="font-semibold text-xl tracking-tight ml-4">Builder Archero</span>
+      <router-link to="/" class="font-semibold text-xl tracking-tight ml-4">Builder Archero</router-link>
     </div>
     <div class="block lg:hidden" @click="isExpanded=!isExpanded">
       <button class="navbar-menu-button">

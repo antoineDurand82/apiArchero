@@ -1,18 +1,19 @@
 // Bracelet Model
 
-import { Model } from '@vuex-orm/core'
+import CustomModel from './customModel.model'
 
 import User from './user.model'
 import UserBracelet from './userBracelet.model'
 
-export default class Bracelet extends Model {
+export default class Bracelet extends CustomModel {
   
-  static entity = 'bracelet'
+  static entity = 'bracelets'
   static primaryKey = 'id'
+  static apiPath = 'bracelets'
 
   static fields () {
     return {
-      id: this.number(0),
+      id: this.number(null),
       fullName: this.string('bracelet'),
       attack: this.number(0),
       commonBuff: this.string('commonBuff'),
