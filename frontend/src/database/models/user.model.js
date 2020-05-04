@@ -1,5 +1,6 @@
 // User Model
 import { map } from 'lodash'
+import CustomModel from './customModel.model'
 
 import Ring from './ring.model'
 import Armor from './armor.model'
