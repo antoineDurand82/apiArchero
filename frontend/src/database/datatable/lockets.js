@@ -1,4 +1,4 @@
-export default Lockets = {
+export default {
   columns: [
     {
       'key': 'id',

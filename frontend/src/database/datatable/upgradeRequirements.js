@@ -1,4 +1,4 @@
-export default UpgradeRequirements = {
+export default {
   columns: [
     {
       'key': 'id',

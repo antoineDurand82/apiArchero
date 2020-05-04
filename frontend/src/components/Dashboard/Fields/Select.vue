@@ -49,7 +49,7 @@ export default {
     if(typeof this.options !== 'object') {
       this.funcOptions = await this.options();
     }
-    if(this.opts.indexOf(this.value) === -1 && this.value === 'string') this.value = 'none'
+    if(this.isDefault) this.value = Array.isArray(this.value) ? ['none'] : 'none'
   },
   watch: {
     val() {
@@ -60,11 +60,14 @@ export default {
     opts() {
       return typeof this.options === 'object' ? this.options : this.funcOptions;
     },
+    isDefault() {
+      return !this.value || this.value === 'none' || Array.isArray(this.value) && this.value.length === 0
+    }
   },
   methods: {
     checkLimit() {
-      if(this.limit && typeof this.value !== 'string' && this.value.length > this.limit) this.value = this.value.slice(0, this.limit)
+      if(this.limit && Array.isArray(this.value) && this.value.length > this.limit) this.value = this.value.slice(0, this.limit)
     }
-  }
+  },
 }
 </script>

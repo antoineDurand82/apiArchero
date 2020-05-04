@@ -1,6 +1,5 @@
 // User Model
-
-import CustomModel from './customModel.model'
+import { map } from 'lodash'
 
 import Ring from './ring.model'
 import Armor from './armor.model'
@@ -19,8 +18,6 @@ import UserLocket from './userLocket.model'
 import UserPet from './userPet.model'
 import UserTalent from './userTalent.model'
 import UserWeapon from './userWeapon.model'
-
-import { map } from 'lodash'
 
 export default class User extends CustomModel {
 
@@ -43,46 +40,46 @@ export default class User extends CustomModel {
       criticalDamageChance: this.number(0),
       criticalDamage: this.number(0),
       angelDoubleHealingChance: this.number(0),
-      rings: this.belongsToMany(Ring, UserRing, 'user_id', 'ring_id'),
-      armor: this.belongsToMany(Armor, UserArmor, 'user_id', 'armor_id'),
-      bracelet: this.belongsToMany(Bracelet, UserBracelet, 'user_id', 'bracelet_id'),
-      hero: this.belongsToMany(Hero, UserHero, 'user_id', 'hero_id'),
-      locket: this.belongsToMany(Locket, UserLocket, 'user_id', 'locket_id'),
-      pets: this.belongsToMany(Pet, UserPet, 'user_id', 'pet_id'),
-      talents: this.belongsToMany(Talent, UserTalent, 'user_id', 'talent_id'),
-      weapon: this.belongsToMany(Weapon, UserWeapon, 'user_id', 'weapon_id'),
+      rings: this.belongsToMany(Ring, UserRing, 'userId', 'ringId'),
+      armors: this.belongsToMany(Armor, UserArmor, 'userId', 'armorId'),
+      bracelets: this.belongsToMany(Bracelet, UserBracelet, 'userId', 'braceletId'),
+      heroes: this.belongsToMany(Hero, UserHero, 'userId', 'heroId'),
+      lockets: this.belongsToMany(Locket, UserLocket, 'userId', 'locketId'),
+      pets: this.belongsToMany(Pet, UserPet, 'userId', 'petId'),
+      talents: this.belongsToMany(Talent, UserTalent, 'userId', 'talentId'),
+      weapons: this.belongsToMany(Weapon, UserWeapon, 'userId', 'weaponId'),
     }
   }
 
   get ringsId() {
-    return map(this.rings, ['ring_id'])
+    return map(this.rings, ['ringId'])
   }
 
-  get armorId() {
-    return map(this.armor, ['armor_id'])
+  get armorsId() {
+    return map(this.armors, ['armorId'])
   }
 
-  get braceletId() {
-    return map(this.bracelet, ['bracelet_id'])
+  get braceletsId() {
+    return map(this.bracelets, ['braceletId'])
   }
 
-  get heroId() {
-    return map(this.hero, ['hero_id'])
+  get heroesId() {
+    return map(this.heroes, ['heroId'])
   }
 
-  get locketId() {
-    return map(this.locket, ['locket_id'])
+  get locketsId() {
+    return map(this.lockets, ['locketId'])
   }
 
-  get weaponId() {
-    return map(this.weapon, ['weapon_id'])
+  get weaponsId() {
+    return map(this.weapons, ['weaponId'])
   }
 
   get petsId() {
-    return map(this.pets, ['pet_id'])
+    return map(this.pets, ['petId'])
   }
 
   get talentsId() {
-    return map(this.talents, ['talent_id'])
+    return map(this.talents, ['talentId'])
   }
 }

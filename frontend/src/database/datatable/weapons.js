@@ -1,4 +1,4 @@
-export default Weapons = {
+export default {
   columns: [
     {
       'key': 'id',

@@ -1,23 +1,14 @@
-import Ring from './models/ring.model'
-import Armor from './models/armor.model'
-import Bracelet from './models/bracelet.model'
-import Hero from './models/hero.model'
-import Locket from './models/locket.model'
-import Pet from './models/pet.model'
-import Talent from './models/talent.model'
-import Weapon from './models/weapon.model'
-
-// import UserRing from './models/userRing.model'
-// import UserArmor from './models/userArmor.model'
-// import UserBracelet from './models/userBracelet.model'
-// import UserHero from './models/userHero.model'
-// import UserLocket from './models/userLocket.model'
-// import UserPet from './models/userPet.model'
-// import UserTalent from './models/userTalent.model'
-// import UserWeapon from './models/userWeapon.model'
+import Ring from '../models/ring.model'
+import Armor from '../models/armor.model'
+import Bracelet from '../models/bracelet.model'
+import Hero from '../models/hero.model'
+import Locket from '../models/locket.model'
+import Pet from '../models/pet.model'
+import Talent from '../models/talent.model'
+import Weapon from '../models/weapon.model'
 
 
-export default Users = {
+export default {
   columns: [
     {
       'key': 'id',
@@ -79,15 +70,15 @@ export default Users = {
     fields: [
       {
         key: 'rings',
-        addValue: () => ({pivot:{ring_id: null}}),
+        addValue: () => ({pivot:{ringId: null}}),
         setValue: (oldVal, newVal, index, key) => {
           oldVal[index].pivot[key] = newVal
           return oldVal
         },
         children: [
           {
-            key: 'ring_id',
-            label: 'Ring',
+            key: 'ringId',
+            label: 'Name',
             type: 'select',
             options: {
               options: () => {
@@ -100,115 +91,382 @@ export default Users = {
           },
           {
             key: 'level',
-            label: 'Ring Level',
+            label: 'Level',
             type: 'number',
             options: {
               min: 1
             }
           },
+          {
+            key: 'rarity',
+            label: 'Rarity',
+            type: 'select',
+            options: {
+              options: {
+                Common: 'Common',
+                Rare: 'Rare',
+                Epic: 'Epic',
+                PerfectEpic: 'PerfectEpic',
+                Legendary: 'Legendary',
+                AncientLegendary: 'AncientLegendary'
+              }
+            }
+          }
         ],
         prefix: 'pivot',
         add: true,
         limit: 2,
         label: 'Ring'
-      }
-      {
-        key: 'armorId',
-        label: 'Armor',
-        type: 'select',
-        options: {
-          options: async () => {
-            await Armor.fetchAll()
-            return Armor.all()
-          },
-          display: 'fullName',
-          displayId: 'id',
-          optionValue: 'id'
-        }
       },
       {
-        key: 'braceletId',
-        label: 'Bracelet',
-        type: 'select',
-        options: {
-          options: async () => {
-            await Bracelet.fetchAll()
-            return Bracelet.all()
+        key: 'armors',
+        addValue: () => ({pivot:{armorId: null}}),
+        setValue: (oldVal, newVal, index, key) => {
+          oldVal[index].pivot[key] = newVal
+          return oldVal
+        },
+        children: [
+          {
+            key: 'armorId',
+            label: 'Name',
+            type: 'select',
+            options: {
+              options: () => {
+                return Armor.all()
+              },
+              display: 'fullName',
+              displayId: 'id',
+              optionValue: 'id'
+            }
           },
-          display: 'fullName',
-          displayId: 'id',
-          optionValue: 'id'
-        }
+          {
+            key: 'level',
+            label: 'Level',
+            type: 'number',
+            options: {
+              min: 1
+            }
+          },
+          {
+            key: 'rarity',
+            label: 'Rarity',
+            type: 'select',
+            options: {
+              options: {
+                Common: 'Common',
+                Rare: 'Rare',
+                Epic: 'Epic',
+                PerfectEpic: 'PerfectEpic',
+                Legendary: 'Legendary',
+                AncientLegendary: 'AncientLegendary'
+              }
+            }
+          }
+        ],
+        prefix: 'pivot',
+        add: true,
+        limit: 1,
+        label: 'Armor'
       },
       {
-        key: 'heroId',
-        label: 'Hero',
-        type: 'select',
-        options: {
-          options: async () => {
-            await Hero.fetchAll()
-            return Hero.all()
+        key: 'bracelets',
+        addValue: () => ({pivot:{braceletId: null}}),
+        setValue: (oldVal, newVal, index, key) => {
+          oldVal[index].pivot[key] = newVal
+          return oldVal
+        },
+        children: [
+          {
+            key: 'braceletId',
+            label: 'Name',
+            type: 'select',
+            options: {
+              options: () => {
+                return Bracelet.all()
+              },
+              display: 'fullName',
+              displayId: 'id',
+              optionValue: 'id'
+            }
           },
-          display: 'fullName',
-          displayId: 'id',
-          optionValue: 'id'
-        }
+          {
+            key: 'level',
+            label: 'Level',
+            type: 'number',
+            options: {
+              min: 1
+            }
+          },
+          {
+            key: 'rarity',
+            label: 'Rarity',
+            type: 'select',
+            options: {
+              options: {
+                Common: 'Common',
+                Rare: 'Rare',
+                Epic: 'Epic',
+                PerfectEpic: 'PerfectEpic',
+                Legendary: 'Legendary',
+                AncientLegendary: 'AncientLegendary'
+              }
+            }
+          }
+        ],
+        prefix: 'pivot',
+        add: true,
+        limit: 1,
+        label: 'Bracelet'
       },
       {
-        key: 'locketId',
-        label: 'Locket',
-        type: 'select',
-        options: {
-          options: async () => {
-            await Locket.fetchAll()
-            return Locket.all()
+        key: 'heroes',
+        addValue: () => ({pivot:{heroId: null}}),
+        setValue: (oldVal, newVal, index, key) => {
+          oldVal[index].pivot[key] = newVal
+          return oldVal
+        },
+        children: [
+          {
+            key: 'heroId',
+            label: 'Name',
+            type: 'select',
+            options: {
+              options: () => {
+                return Hero.all()
+              },
+              display: 'fullName',
+              displayId: 'id',
+              optionValue: 'id'
+            }
           },
-          display: 'fullName',
-          displayId: 'id',
-          optionValue: 'id'
-        }
+          {
+            key: 'level',
+            label: 'Level',
+            type: 'number',
+            options: {
+              min: 1
+            }
+          },
+          {
+            key: 'rarity',
+            label: 'Rarity',
+            type: 'select',
+            options: {
+              options: {
+                Common: 'Common',
+                Rare: 'Rare',
+                Epic: 'Epic',
+                PerfectEpic: 'PerfectEpic',
+                Legendary: 'Legendary',
+                AncientLegendary: 'AncientLegendary'
+              }
+            }
+          }
+        ],
+        prefix: 'pivot',
+        add: true,
+        limit: 1,
+        label: 'Hero'
       },
       {
-        key: 'petsId',
-        label: 'Pets',
-        type: 'select',
-        options: {
-          options: async () => {
-            await Pet.fetchAll()
-            return Pet.all()
+        key: 'lockets',
+        addValue: () => ({pivot:{locketId: null}}),
+        setValue: (oldVal, newVal, index, key) => {
+          oldVal[index].pivot[key] = newVal
+          return oldVal
+        },
+        children: [
+          {
+            key: 'locketId',
+            label: 'Name',
+            type: 'select',
+            options: {
+              options: () => {
+                return Locket.all()
+              },
+              display: 'fullName',
+              displayId: 'id',
+              optionValue: 'id'
+            }
           },
-          display: 'fullName',
-          displayId: 'id',
-          optionValue: 'id'
-        }
+          {
+            key: 'level',
+            label: 'Level',
+            type: 'number',
+            options: {
+              min: 1
+            }
+          },
+          {
+            key: 'rarity',
+            label: 'Rarity',
+            type: 'select',
+            options: {
+              options: {
+                Common: 'Common',
+                Rare: 'Rare',
+                Epic: 'Epic',
+                PerfectEpic: 'PerfectEpic',
+                Legendary: 'Legendary',
+                AncientLegendary: 'AncientLegendary'
+              }
+            }
+          }
+        ],
+        prefix: 'pivot',
+        add: true,
+        limit: 1,
+        label: 'Locket'
       },
       {
-        key: 'talentsId',
-        label: 'Talents',
-        type: 'select',
-        options: {
-          options: async () => {
-            await Talent.fetchAll()
-            return Talent.all()
+        key: 'pets',
+        addValue: () => ({pivot:{petId: null}}),
+        setValue: (oldVal, newVal, index, key) => {
+          oldVal[index].pivot[key] = newVal
+          return oldVal
+        },
+        children: [
+          {
+            key: 'petId',
+            label: 'Name',
+            type: 'select',
+            options: {
+              options: () => {
+                return Pet.all()
+              },
+              display: 'fullName',
+              displayId: 'id',
+              optionValue: 'id'
+            }
           },
-          display: 'fullName',
-          displayId: 'id',
-          optionValue: 'id'
-        }
+          {
+            key: 'level',
+            label: 'Level',
+            type: 'number',
+            options: {
+              min: 1
+            }
+          },
+          {
+            key: 'rarity',
+            label: 'Rarity',
+            type: 'select',
+            options: {
+              options: {
+                Common: 'Common',
+                Rare: 'Rare',
+                Epic: 'Epic',
+                PerfectEpic: 'PerfectEpic',
+                Legendary: 'Legendary',
+                AncientLegendary: 'AncientLegendary'
+              }
+            }
+          }
+        ],
+        prefix: 'pivot',
+        add: true,
+        limit: 2,
+        label: 'Pet'
       },
       {
-        key: 'weaponId',
-        label: 'Weapon',
-        type: 'select',
-        options: {
-          options: async () => {
-            await Weapon.fetchAll()
-            return Weapon.all()
+        key: 'talents',
+        addValue: () => ({pivot:{talentId: null}}),
+        setValue: (oldVal, newVal, index, key) => {
+          oldVal[index].pivot[key] = newVal
+          return oldVal
+        },
+        children: [
+          {
+            key: 'talentId',
+            label: 'Name',
+            type: 'select',
+            options: {
+              options: () => {
+                return Talent.all()
+              },
+              display: 'fullName',
+              displayId: 'id',
+              optionValue: 'id'
+            }
           },
-          display: 'fullName',
-          displayId: 'id',
-          optionValue: 'id'
-        }
+          {
+            key: 'level',
+            label: 'Level',
+            type: 'number',
+            options: {
+              min: 1
+            }
+          },
+          {
+            key: 'rarity',
+            label: 'Rarity',
+            type: 'select',
+            options: {
+              options: {
+                Common: 'Common',
+                Rare: 'Rare',
+                Epic: 'Epic',
+                PerfectEpic: 'PerfectEpic',
+                Legendary: 'Legendary',
+                AncientLegendary: 'AncientLegendary'
+              }
+            }
+          }
+        ],
+        prefix: 'pivot',
+        add: true,
+        limit: 6,
+        label: 'Talent'
+      },
+      {
+        key: 'weapons',
+        addValue: () => ({pivot:{weaponId: null}}),
+        setValue: (oldVal, newVal, index, key) => {
+          oldVal[index].pivot[key] = newVal
+          return oldVal
+        },
+        children: [
+          {
+            key: 'weaponId',
+            label: 'Name',
+            type: 'select',
+            options: {
+              options: () => {
+                return Pet.all()
+              },
+              display: 'fullName',
+              displayId: 'id',
+              optionValue: 'id'
+            }
+          },
+          {
+            key: 'level',
+            label: 'Level',
+            type: 'number',
+            options: {
+              min: 1
+            }
+          },
+          {
+            key: 'rarity',
+            label: 'Rarity',
+            type: 'select',
+            options: {
+              options: {
+                Common: 'Common',
+                Rare: 'Rare',
+                Epic: 'Epic',
+                PerfectEpic: 'PerfectEpic',
+                Legendary: 'Legendary',
+                AncientLegendary: 'AncientLegendary'
+              }
+            }
+          }
+        ],
+        prefix: 'pivot',
+        add: true,
+        limit: 1,
+        label: 'Weapon'
       },
     ],
   },
@@ -221,13 +479,5 @@ export default Users = {
     await Pet.fetchAll()
     await Talent.fetchAll()
     await Weapon.fetchAll()
-    // await UserRing.fetchAll()
-    // await UserArmor.fetchAll()
-    // await UserBracelet.fetchAll()
-    // await UserHero.fetchAll()
-    // await UserLocket.fetchAll()
-    // await UserPet.fetchAll()
-    // await UserTalent.fetchAll()
-    // await UserWeapon.fetchAll()
   }
 }

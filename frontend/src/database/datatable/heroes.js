@@ -1,4 +1,4 @@
-export default Heroes = {
+export default {
   columns: [
     {
       'key': 'id',

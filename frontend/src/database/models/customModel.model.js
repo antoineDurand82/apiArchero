@@ -12,11 +12,11 @@ export default class CustomModel extends Model {
   }
 
   static save(data, config = {}) {
-    return this.api().post(this.apiPath, data, config)
+    return this.api().post(this.apiPath, data, { save: false , ...config })
   }
 
   static replace(id, data, config = {}) {
-    return this.api().put(this.apiPath + "/" + id, data, config)
+    return this.api().put(this.apiPath + "/" + id, data, { save: false , ...config })
   }
 
   static async destroyAll(ids, config = {}) {

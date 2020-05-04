@@ -1,4 +1,4 @@
-export default Rings = {
+export default {
   columns: [
     {
       'key': 'id',

@@ -1,4 +1,4 @@
-export default Armors = {
+export default {
   columns: [
     {
       'key': 'id',

@@ -1,26 +1,26 @@
-import Users from './datatable/users'
-import Armors from './datatable/armors'
-import Bracelets from './datatable/bracelets'
-import Heroes from './datatable/heroes'
-import Lockets from './datatable/lockets'
-import Pets from './datatable/pets'
-import Rings from './datatable/rings'
-import Talents from './datatable/talents'
-import UpgradeRequirements from './datatable/upgradeRequirements'
-import Weapons from './datatable/weapons'
+import users from './datatable/users'
+import armors from './datatable/armors'
+import bracelets from './datatable/bracelets'
+import heroes from './datatable/heroes'
+import lockets from './datatable/lockets'
+import pets from './datatable/pets'
+import rings from './datatable/rings'
+import talents from './datatable/talents'
+import upgradeRequirements from './datatable/upgradeRequirements'
+import weapons from './datatable/weapons'
 
 
 export default {
   state: () => ({
-    users: Users,
-    armors: Armors,
-    bracelets: Bracelets,
-    heroes: Heroes,
-    lockets: Lockets,
-    pets: Pets,
-    rings: Rings,
-    talents: Talents,
-    upgradeRequirements: UpgradeRequirements,
-    weapons: Weapons,
+    users,
+    armors,
+    bracelets,
+    heroes,
+    lockets,
+    pets,
+    rings,
+    talents,
+    upgradeRequirements,
+    weapons,
   })
 }

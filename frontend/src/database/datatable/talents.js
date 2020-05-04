@@ -1,4 +1,4 @@
-export default Talents = {
+export default {
   columns: [
     {
       'key': 'id',

@@ -5,12 +5,12 @@
     </template>
     <template v-slot:content>
       <form @submit.prevent="$emit('submit', editingModel)">
-        <div v-for="field in form.fields" :key="field.key" class="my-2">
+        <div v-for="(field, fieldIndex) in form.fields" :key="field.key" class="my-2">
           <template v-if="field.children">
-            <div v-for="(val, index) in editingModel[field.key]" :key="field.key + '.' + index">
+            <div v-for="(val, index) in editingModel[field.key]" :key="field.key + '.' + index" :class="[fieldIndex !== form.fields.length - 1 && !(field.add && (!field.limit || editingModel[field.key].length < field.limit)) ? 'border-b border-gray-200' : '']">
               <div v-for="child in field.children" :key="JSON.stringify(child)" class="my-2">
                 <div class="flex justify-center items-center">
-                  <label :for="field.key + '-' + index + '-' + child.key" class="mr-3 w-64">{{ child.label }} {{ index }}</label>
+                  <label :for="field.key + '-' + index + '-' + child.key" class="mr-3 w-64">{{ field.label }}  {{ index + 1 }} {{ child.label }}</label>
                   <component
                     class="w-64"
                     v-bind="child.options"
@@ -30,8 +30,8 @@
                 </div>
               </div>
             </div>
-            <div v-if="field.add && (!field.limit || editingModel[field.key].length < field.limit)" clas="text-center">
-              <button @click.prevent="editingModel[field.key].push(field.addValue ? field.addValue() : {})">Add {{ field.label }}</button>
+            <div v-if="field.add && (!field.limit || editingModel[field.key].length < field.limit)" class="text-center">
+              <button @click.prevent="editingModel[field.key].push(field.addValue ? field.addValue() : {})" class="btn border border-teal-700 text-teal-700 my-1">Add {{ field.label }}</button>
             </div>
           </template>
           <template v-else>
@@ -143,7 +143,6 @@ export default {
       const k = field.setKey ?? key
       const val = field.setValue ? field.setValue(this.editingModel[k], value, index, childKey) : value
       this.editingModel[k] = val
-      console.log(this.editingModel[k])
     },
     toggle(force = undefined) {
       this.$refs.modal.toggle(force)

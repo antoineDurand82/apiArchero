@@ -1,4 +1,4 @@
-export default Pets = {
+export default {
   columns: [
     {
       'key': 'id',
