@@ -419,7 +419,7 @@ export default {
             type: 'select',
             options: {
               options: () => {
-                return Pet.all()
+                return Weapon.all()
               },
               display: 'fullName',
               displayId: 'id',
