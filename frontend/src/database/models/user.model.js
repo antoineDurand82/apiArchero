@@ -1,5 +1,4 @@
 // User Model
-import { map } from 'lodash'
 import CustomModel from './customModel.model'
 
 import Ring from './ring.model'
@@ -19,6 +18,8 @@ import UserLocket from './userLocket.model'
 import UserPet from './userPet.model'
 import UserTalent from './userTalent.model'
 import UserWeapon from './userWeapon.model'
+
+import { map } from 'lodash'
 
 export default class User extends CustomModel {
 
