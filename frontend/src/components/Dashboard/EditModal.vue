@@ -120,8 +120,8 @@ export default {
       return ['text', 'number', 'email'].indexOf(type) !== -1 ? 'input' : type
     },
     getDefaultValue(field) {
-      return field.default
-        ?? field.type === 'number'
+      return field.default !== 'undefined' ? field.default()
+        : field.type === 'number'
           ? 0
           : field.type === 'select'
             ? field.options.multiple ? [Object.keys(field.options.options)[0]] : Object.keys(field.options.options)[0]
@@ -160,6 +160,7 @@ export default {
         })
         this.editingModel = model
       }
+      console.log(this.editingModel)
     }
   }
 }

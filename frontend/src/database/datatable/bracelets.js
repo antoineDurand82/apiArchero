@@ -38,7 +38,8 @@ export default {
     },
     {
       'key': 'linkImage',
-      'name': 'Image'
+      'name': 'Image',
+      slot: (bracelet) => `<img src="http://localhost:3000${bracelet.linkImage}" alt="Bracelet ${bracelet.fullName} image" />`
     }
   ],
   form: {

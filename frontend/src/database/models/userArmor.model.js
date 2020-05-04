@@ -13,6 +13,8 @@ export default class UserArmor extends CustomModel {
       id: this.number(null),
       level: this.number(0),
       rarity: this.string('Common'),
+      armorId: this.number(null),
+      userId: this.number(null),
     }
   }
 }

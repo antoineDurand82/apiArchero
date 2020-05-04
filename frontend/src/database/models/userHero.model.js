@@ -12,6 +12,8 @@ export default class UserHero extends CustomModel {
     return {
       id: this.number(null),
       level: this.number(0),
+      heroId: this.number(null),
+      userId: this.number(null),
     }
   }
 }

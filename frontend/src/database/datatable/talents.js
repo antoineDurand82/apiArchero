@@ -14,7 +14,8 @@ export default {
     },
     {
       'key': 'linkImage',
-      'name': 'Image'
+      'name': 'Image',
+      slot: (talent) => `<img src="http://localhost:3000${talent.linkImage}" alt="Talent ${talent.fullName} image" />`
     }
   ],
   form: {

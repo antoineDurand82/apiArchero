@@ -38,7 +38,8 @@ export default {
     },
     {
       'key': 'linkImage',
-      'name': 'Image'
+      'name': 'Image',
+      slot: (ring) => `<img src="http://localhost:3000${ring.linkImage}" alt="Ring ${ring.fullName} image" />`
     }
   ],
   form: {

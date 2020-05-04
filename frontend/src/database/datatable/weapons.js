@@ -38,7 +38,8 @@ export default {
     },
     {
       'key': 'linkImage',
-      'name': 'Image'
+      'name': 'Image',
+      slot: (weapon) => `<img src="http://localhost:3000${weapon.linkImage}" alt="Weapon ${weapon.fullName} image" />`
     }
   ],
   form: {

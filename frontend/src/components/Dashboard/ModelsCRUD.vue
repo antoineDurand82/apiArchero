@@ -12,12 +12,15 @@
       @delete="deleteData" 
       @submit="submitForm" 
     >
+      <template v-for="column in columnsWithSlot" :slot="`cell:${column.key}`" scope="{scope}">
+        <div :key="column.key" v-html="column.slot(scope)"></div>
+      </template>
     </DataTable>
   </div>
 </template>
 
 <script>
-import { map } from 'lodash'
+import { map, filter } from 'lodash'
 
 export default {
   components: {
@@ -113,6 +116,9 @@ export default {
     },
     entityName() {
       return this.$route.params.entityName
+    },
+    columnsWithSlot() {
+      return filter(this.columns, column => column.slot)
     }
   }
 }

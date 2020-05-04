@@ -13,6 +13,8 @@ export default class UserBracelet extends CustomModel {
       id: this.number(null),
       level: this.number(0),
       rarity: this.string('Common'),
+      braceletId: this.number(null),
+      userId: this.number(null),
     }
   }
 }

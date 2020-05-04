@@ -12,6 +12,8 @@ export default class UserTalent extends CustomModel {
     return {
       id: this.number(null),
       level: this.number(0),
+      talentId: this.number(null),
+      userId: this.number(null),
     }
   }
 }

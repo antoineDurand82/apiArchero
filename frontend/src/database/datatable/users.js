@@ -8,13 +8,13 @@ import Talent from '../models/talent.model'
 import Weapon from '../models/weapon.model'
 
 import UserRing from '../models/userRing.model'
-// import UserArmor from '../models/userArmor.model'
-// import UserBracelet from '../models/userBracelet.model'
-// import UserHero from '../models/userHero.model'
-// import UserLocket from '../models/userLocket.model'
-// import UserPet from '../models/userPet.model'
-// import UserTalent from '../models/userTalent.model'
-// import UserWeapon from '../models/userWeapon.model'
+import UserArmor from '../models/userArmor.model'
+import UserBracelet from '../models/userBracelet.model'
+import UserHero from '../models/userHero.model'
+import UserLocket from '../models/userLocket.model'
+import UserPet from '../models/userPet.model'
+import UserTalent from '../models/userTalent.model'
+import UserWeapon from '../models/userWeapon.model'
 
 
 export default {
@@ -79,7 +79,8 @@ export default {
     fields: [
       {
         key: 'rings',
-        addValue: () => ({pivot:{ringId: null}}),
+        default: () => [],
+        addValue: () => ({pivot:{ringId: null, rarity: 'common', level: 1}}),
         setValue: (oldVal, newVal, index, key) => {
           oldVal[index].pivot[key] = newVal
           return oldVal
@@ -129,7 +130,8 @@ export default {
       },
       {
         key: 'armors',
-        addValue: () => ({pivot:{armorId: null}}),
+        default: () => [],
+        addValue: () => ({pivot:{armorId: null, rarity: 'common', level: 1}}),
         setValue: (oldVal, newVal, index, key) => {
           oldVal[index].pivot[key] = newVal
           return oldVal
@@ -179,7 +181,8 @@ export default {
       },
       {
         key: 'bracelets',
-        addValue: () => ({pivot:{braceletId: null}}),
+        default: () => [],
+        addValue: () => ({pivot:{braceletId: null, rarity: 'common', level: 1}}),
         setValue: (oldVal, newVal, index, key) => {
           oldVal[index].pivot[key] = newVal
           return oldVal
@@ -229,7 +232,8 @@ export default {
       },
       {
         key: 'heroes',
-        addValue: () => ({pivot:{heroId: null}}),
+        default: () => [],
+        addValue: () => ({pivot:{heroId: null, level: 1}}),
         setValue: (oldVal, newVal, index, key) => {
           oldVal[index].pivot[key] = newVal
           return oldVal
@@ -255,21 +259,6 @@ export default {
             options: {
               min: 1
             }
-          },
-          {
-            key: 'rarity',
-            label: 'Rarity',
-            type: 'select',
-            options: {
-              options: {
-                common: 'Common',
-                rare: 'Rare',
-                epic: 'Epic',
-                perfectEpic: 'Perfect Epic',
-                legendary: 'Legendary',
-                ancientLegendary: 'Ancient Legendary'
-              }
-            }
           }
         ],
         prefix: 'pivot',
@@ -279,7 +268,8 @@ export default {
       },
       {
         key: 'lockets',
-        addValue: () => ({pivot:{locketId: null}}),
+        default: () => [],
+        addValue: () => ({pivot:{locketId: null, rarity: 'common', level: 1}}),
         setValue: (oldVal, newVal, index, key) => {
           oldVal[index].pivot[key] = newVal
           return oldVal
@@ -329,7 +319,8 @@ export default {
       },
       {
         key: 'pets',
-        addValue: () => ({pivot:{petId: null}}),
+        default: () => [],
+        addValue: () => ({pivot:{petId: null, rarity: 'common', level: 1}}),
         setValue: (oldVal, newVal, index, key) => {
           oldVal[index].pivot[key] = newVal
           return oldVal
@@ -379,7 +370,8 @@ export default {
       },
       {
         key: 'talents',
-        addValue: () => ({pivot:{talentId: null}}),
+        default: () => [],
+        addValue: () => ({pivot:{talentId: null, level: 1}}),
         setValue: (oldVal, newVal, index, key) => {
           oldVal[index].pivot[key] = newVal
           return oldVal
@@ -405,21 +397,6 @@ export default {
             options: {
               min: 1
             }
-          },
-          {
-            key: 'rarity',
-            label: 'Rarity',
-            type: 'select',
-            options: {
-              options: {
-                common: 'Common',
-                rare: 'Rare',
-                epic: 'Epic',
-                perfectEpic: 'Perfect Epic',
-                legendary: 'Legendary',
-                ancientLegendary: 'Ancient Legendary'
-              }
-            }
           }
         ],
         prefix: 'pivot',
@@ -429,6 +406,7 @@ export default {
       },
       {
         key: 'weapons',
+        default: () => [],
         addValue: () => ({pivot:{weaponId: null}}),
         setValue: (oldVal, newVal, index, key) => {
           oldVal[index].pivot[key] = newVal
@@ -490,19 +468,47 @@ export default {
     await Weapon.fetchAll()
 
     await UserRing.fetchAll()
-    // await UserArmor.fetchAll()
-    // await UserBracelet.fetchAll()
-    // await UserHero.fetchAll()
-    // await UserLocket.fetchAll()
-    // await UserPet.fetchAll()
-    // await UserTalent.fetchAll()
-    // await UserWeapon.fetchAll()
+    await UserArmor.fetchAll()
+    await UserBracelet.fetchAll()
+    await UserHero.fetchAll()
+    await UserLocket.fetchAll()
+    await UserPet.fetchAll()
+    await UserTalent.fetchAll()
+    await UserWeapon.fetchAll()
   },
   beforeSubmit: async (id) => {
     if(!id) return
     const userRings = UserRing.query().whereFk('userId', id).get()
     userRings.forEach(userRing => {
       userRing.$delete()
+    })
+    const userArmors = UserArmor.query().whereFk('userId', id).get()
+    userArmors.forEach(userArmor => {
+      userArmor.$delete()
+    })
+    const userBracelets = UserBracelet.query().whereFk('userId', id).get()
+    userBracelets.forEach(userBracelet => {
+      userBracelet.$delete()
+    })
+    const userHeroes = UserHero.query().whereFk('userId', id).get()
+    userHeroes.forEach(userHero => {
+      userHero.$delete()
+    })
+    const userLockets = UserLocket.query().whereFk('userId', id).get()
+    userLockets.forEach(userLocket => {
+      userLocket.$delete()
+    })
+    const userPets = UserPet.query().whereFk('userId', id).get()
+    userPets.forEach(userPet => {
+      userPet.$delete()
+    })
+    const userTalents = UserTalent.query().whereFk('userId', id).get()
+    userTalents.forEach(userTalent => {
+      userTalent.$delete()
+    })
+    const userWeapons = UserWeapon.query().whereFk('userId', id).get()
+    userWeapons.forEach(userWeapon => {
+      userWeapon.$delete()
     })
   }
 }
