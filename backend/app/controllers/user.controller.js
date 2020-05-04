@@ -30,42 +30,42 @@ exports.create = async (req, res) => {
     const createdUser =  await User.create(user)
     if (Array.isArray(req.body.armors)) {
       req.body.armors.forEach(armor => {
-        user.addArmor(armor.armorId, {through: {level: armor.level, rarity: armor.rarity}})
+        createdUser.addArmor(armor.armorId, {through: {level: armor.level, rarity: armor.rarity}})
       });
     };
     if (Array.isArray(req.body.bracelets)) {
       req.body.bracelets.forEach(bracelet => {
-        user.addBracelet(bracelet.braceletId, {through: {level: bracelet.level, rarity: bracelet.rarity}})
+        createdUser.addBracelet(bracelet.braceletId, {through: {level: bracelet.level, rarity: bracelet.rarity}})
       });
     };
     if (Array.isArray(req.body.heroes)) {
       req.body.heroes.forEach(hero => {
-        user.addHero(hero.heroId, {through: {level: hero.level}})
+        createdUser.addHero(hero.heroId, {through: {level: hero.level}})
       });
     };
     if (Array.isArray(req.body.lockets)) {
       req.body.lockets.forEach(locket => {
-        user.addLocket(locket.locketId, {through: {level: locket.level, rarity: locket.rarity}})
+        createdUser.addLocket(locket.locketId, {through: {level: locket.level, rarity: locket.rarity}})
       });
     };
     if (Array.isArray(req.body.pets)) {
       req.body.pets.forEach(pet => {
-        user.addPet(pet.petId, {through: {level: pet.level, rarity: pet.rarity}})
+        createdUser.addPet(pet.petId, {through: {level: pet.level, rarity: pet.rarity}})
       });
     };
     if (Array.isArray(req.body.rings)) {
       req.body.rings.forEach(ring => {
-        user.addRing(ring.ringId, {through: {level: ring.level, rarity: ring.rarity}})
+        createdUser.addRing(ring.ringId, {through: {level: ring.level, rarity: ring.rarity}})
       });
     };
     if (Array.isArray(req.body.talents)) {
       req.body.talents.forEach(talent => {
-        user.addTalent(talent.talentId, {through: {level: talent.level}})
+        createdUser.addTalent(talent.talentId, {through: {level: talent.level}})
       });
     };
     if (Array.isArray(req.body.weapons)) {
       req.body.weapons.forEach(weapon => {
-        user.addWeapon(weapon.weaponId, {through: {level: weapon.level, rarity: weapon.rarity}})
+        createdUser.addWeapon(weapon.weaponId, {through: {level: weapon.level, rarity: weapon.rarity}})
       });
     };
     
@@ -119,52 +119,52 @@ exports.update = (req, res) => {
   const id = req.params.id;
   try { 
     const updatedUser = await User.update(req.body, {where: { id: id }})
-    user.setArmors([])
-    user.setBracelets([])
-    user.setHeroes([])
-    user.setLockets([])
-    user.setPets([])
-    user.setRings([])
-    user.setTalents([])
-    user.setWeapons([])
+    updatedUser.setArmors([])
+    updatedUser.setBracelets([])
+    updatedUser.setHeroes([])
+    updatedUser.setLockets([])
+    updatedUser.setPets([])
+    updatedUser.setRings([])
+    updatedUser.setTalents([])
+    updatedUser.setWeapons([])
     if (Array.isArray(req.body.armors)) {
       req.body.armors.forEach(armor => {
-        user.addArmor(armor.armorId, {through: {level: armor.level, rarity: armor.rarity}})
+        updatedUser.addArmor(armor.armorId, {through: {level: armor.level, rarity: armor.rarity}})
       });
     };
     if (Array.isArray(req.body.bracelets)) {
       req.body.bracelets.forEach(bracelet => {
-        user.addBracelet(bracelet.braceletId, {through: {level: bracelet.level, rarity: bracelet.rarity}})
+        updatedUser.addBracelet(bracelet.braceletId, {through: {level: bracelet.level, rarity: bracelet.rarity}})
       });
     };
     if (Array.isArray(req.body.heroes)) {
       req.body.heroes.forEach(hero => {
-        user.addHero(hero.heroId, {through: {level: hero.level}})
+        updatedUser.addHero(hero.heroId, {through: {level: hero.level}})
       });
     };
     if (Array.isArray(req.body.lockets)) {
       req.body.lockets.forEach(locket => {
-        user.addLocket(locket.locketId, {through: {level: locket.level, rarity: locket.rarity}})
+        updatedUser.addLocket(locket.locketId, {through: {level: locket.level, rarity: locket.rarity}})
       });
     };
     if (Array.isArray(req.body.pets)) {
       req.body.pets.forEach(pet => {
-        user.addPet(pet.petId, {through: {level: pet.level, rarity: pet.rarity}})
+        updatedUser.addPet(pet.petId, {through: {level: pet.level, rarity: pet.rarity}})
       });
     };
     if (Array.isArray(req.body.rings)) {
       req.body.rings.forEach(ring => {
-        user.addRing(ring.ringId, {through: {level: ring.level, rarity: ring.rarity}})
+        updatedUser.addRing(ring.ringId, {through: {level: ring.level, rarity: ring.rarity}})
       });
     };
     if (Array.isArray(req.body.talents)) {
       req.body.talents.forEach(talent => {
-        user.addTalent(talent.talentId, {through: {level: talent.level}})
+        updatedUser.addTalent(talent.talentId, {through: {level: talent.level}})
       });
     };
     if (Array.isArray(req.body.weapons)) {
       req.body.weapons.forEach(weapon => {
-        user.addWeapon(weapon.weaponId, {through: {level: weapon.level, rarity: weapon.rarity}})
+        updatedUser.addWeapon(weapon.weaponId, {through: {level: weapon.level, rarity: weapon.rarity}})
       });
     };
     res.status(200).send(updatedUser)
