@@ -3,9 +3,7 @@ const db = require('../app/models/index')
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    for(let i = 0; i < 10; i++) {
-      await db.weapon.create({level: 10})
-    }
+    await db.weapon.create({level: 10})
   },
 
   down: async (queryInterface, Sequelize) => {

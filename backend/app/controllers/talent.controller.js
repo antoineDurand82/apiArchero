@@ -11,7 +11,7 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a Tutorial
+  // Create a Talent
   const talent = {
     fullName: req.body.fullName,
     buff: req.body.buff,

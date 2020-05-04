@@ -11,7 +11,7 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a Tutorial
+  // Create a Armor
   const armor = {
     fullName: req.body.fullName,
     maxHp: req.body.maxHp,

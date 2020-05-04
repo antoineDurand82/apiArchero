@@ -11,7 +11,7 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a Tutorial
+  // Create a Pet
   const pet = {
     fullName: req.body.fullName,
     commonBuff: req.body.commonBuff,

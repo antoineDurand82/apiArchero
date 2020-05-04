@@ -11,7 +11,7 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a Tutorial
+  // Create a Weapon
   const weapon = {
     fullName: req.body.fullName,
     attack: req.body.attack,
