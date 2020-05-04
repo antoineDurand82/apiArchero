@@ -16,35 +16,44 @@ Une fois dans le repo cloné, vous devrez ensuite vous déplacer dans le dossier
 Il vous sera nécessaire de posséder [docker](https://docs.docker.com/engine/install/ubuntu/) également ainsi que [docker-compose](https://docs.docker.com/compose/install/)
 
 ```bash
-# On va tout d'avord lancer le docker-compose qui lancera notre base de donnée ainsi qu'un phpmyadmin
+# On va tout d'abord lancer les npm install pour avoir tout les packages utiles pour notre projet
+$ cd apiArchero/backend
+$ npm install
+$ cd apiArchero/frontend
+$ npm install
+```
 
-$ cd apiArchero/backend/docker
-$ docker-compose up -d
+```bash
+# Il sera suivit du docker-compose qui lancera notre base de donnée ainsi qu'un phpmyadmin
+
+cd apiArchero/backend/docker
+docker-compose up -d
 ```
 
 ```bash
 # On va ensuite lancer le serveur node js pour l'api
 
-$ cd apiArchero/backend
-$ npm run start
+cd apiArchero/backend
+npm run start
 
 ```
 
 *Pour seeder la base de donnée avec nos données vous pouvez utiliser cette commande :*
 
 ```bash
-$ npx sequelize db:seed:all
+cd apiArchero/backend
+npx sequelize db:seed:all
 ``` 
 
 ```bash
 # Et enfin on va lancer le front
 
-$ cd apiArchero/frontend
-$ npm run serve
+cd apiArchero/frontend
+npm run serve
 ```
 
-Nous vous conseillons de lancer dans des terminaux séparés le docker, le serveur node ainsi que le front.
+Nous vous conseillons de lancer dans des terminaux séparés pour le docker, le serveur node ainsi que le front.
 
-Une fois lancés vous pouvez aller sur http://localhost:3000 pour avoir directement les réponses api ou alors http://localhost:8000 pour avoir l'interface web.
+Une fois lancés vous pouvez aller sur http://localhost:3000 pour avoir directement les réponses api ou alors http://localhost:8080 pour avoir l'interface web.
 
 Une fois sur l'interface web, cliquez sur le bouton dashboard afin d'avoir accès à la partie CRUD.
