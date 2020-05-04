@@ -50,6 +50,7 @@ export default {
       this.funcOptions = await this.options();
     }
     if(this.isDefault) this.value = Array.isArray(this.value) ? ['none'] : 'none'
+    console.log(this.value)
   },
   watch: {
     val() {

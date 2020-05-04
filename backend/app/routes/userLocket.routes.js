@@ -6,8 +6,5 @@ module.exports = app => {
     // Retrieve all userLockets
     router.get("/", userLockets.findAll);
   
-    // Retrieve a single UserLocket with id
-    router.get("/:id", userLockets.findOne);
-  
     app.use('/api/userLockets', router);
   };

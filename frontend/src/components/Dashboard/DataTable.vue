@@ -186,8 +186,7 @@ export default {
 			this.$emit('submit', model)
 		},
 		openEditModal(model = undefined) {
-			const entity = this.entity
-			this.editingModel = model ? entity ? new entity(model) : {...model} : undefined
+			this.editingModel = model ? {...model} : undefined
 			this.$refs.editModal.toggle(true)
 		},
 	}

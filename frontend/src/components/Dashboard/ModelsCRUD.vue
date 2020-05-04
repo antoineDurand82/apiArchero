@@ -60,6 +60,10 @@ export default {
     },
     async submitForm(model) {
       this.isLoading = true
+      if(this.$store.state.datatable[this.entity].beforeSubmit) {
+        await this.$store.state.datatable[this.entity].beforeSubmit(model.id)
+      }
+      model.rings = map(model.rings, (ring) => ({...ring.pivot}))
       try {
         if(!model.id) await this.entityClass.save(model)
         else await this.entityClass.replace(model.id, model)
@@ -71,7 +75,7 @@ export default {
     },
     async fetchAll() {
       this.error = null
-      if(this.$store.state.datatable[this.entity].beforeLoad && typeof this.$store.state.datatable[this.entity].beforeLoad === 'function') {
+      if(this.$store.state.datatable[this.entity].beforeLoad) {
         await this.$store.state.datatable[this.entity].beforeLoad()
       }
       await this.entityClass.fetchAll()

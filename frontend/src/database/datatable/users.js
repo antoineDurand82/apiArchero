@@ -7,6 +7,15 @@ import Pet from '../models/pet.model'
 import Talent from '../models/talent.model'
 import Weapon from '../models/weapon.model'
 
+import UserRing from '../models/userRing.model'
+// import UserArmor from '../models/userArmor.model'
+// import UserBracelet from '../models/userBracelet.model'
+// import UserHero from '../models/userHero.model'
+// import UserLocket from '../models/userLocket.model'
+// import UserPet from '../models/userPet.model'
+// import UserTalent from '../models/userTalent.model'
+// import UserWeapon from '../models/userWeapon.model'
+
 
 export default {
   columns: [
@@ -103,12 +112,12 @@ export default {
             type: 'select',
             options: {
               options: {
-                Common: 'Common',
-                Rare: 'Rare',
-                Epic: 'Epic',
-                PerfectEpic: 'PerfectEpic',
-                Legendary: 'Legendary',
-                AncientLegendary: 'AncientLegendary'
+                common: 'Common',
+                rare: 'Rare',
+                epic: 'Epic',
+                perfectEpic: 'Perfect Epic',
+                legendary: 'Legendary',
+                ancientLegendary: 'Ancient Legendary'
               }
             }
           }
@@ -153,12 +162,12 @@ export default {
             type: 'select',
             options: {
               options: {
-                Common: 'Common',
-                Rare: 'Rare',
-                Epic: 'Epic',
-                PerfectEpic: 'PerfectEpic',
-                Legendary: 'Legendary',
-                AncientLegendary: 'AncientLegendary'
+                common: 'Common',
+                rare: 'Rare',
+                epic: 'Epic',
+                perfectEpic: 'Perfect Epic',
+                legendary: 'Legendary',
+                ancientLegendary: 'Ancient Legendary'
               }
             }
           }
@@ -203,12 +212,12 @@ export default {
             type: 'select',
             options: {
               options: {
-                Common: 'Common',
-                Rare: 'Rare',
-                Epic: 'Epic',
-                PerfectEpic: 'PerfectEpic',
-                Legendary: 'Legendary',
-                AncientLegendary: 'AncientLegendary'
+                common: 'Common',
+                rare: 'Rare',
+                epic: 'Epic',
+                perfectEpic: 'Perfect Epic',
+                legendary: 'Legendary',
+                ancientLegendary: 'Ancient Legendary'
               }
             }
           }
@@ -253,12 +262,12 @@ export default {
             type: 'select',
             options: {
               options: {
-                Common: 'Common',
-                Rare: 'Rare',
-                Epic: 'Epic',
-                PerfectEpic: 'PerfectEpic',
-                Legendary: 'Legendary',
-                AncientLegendary: 'AncientLegendary'
+                common: 'Common',
+                rare: 'Rare',
+                epic: 'Epic',
+                perfectEpic: 'Perfect Epic',
+                legendary: 'Legendary',
+                ancientLegendary: 'Ancient Legendary'
               }
             }
           }
@@ -303,12 +312,12 @@ export default {
             type: 'select',
             options: {
               options: {
-                Common: 'Common',
-                Rare: 'Rare',
-                Epic: 'Epic',
-                PerfectEpic: 'PerfectEpic',
-                Legendary: 'Legendary',
-                AncientLegendary: 'AncientLegendary'
+                common: 'Common',
+                rare: 'Rare',
+                epic: 'Epic',
+                perfectEpic: 'Perfect Epic',
+                legendary: 'Legendary',
+                ancientLegendary: 'Ancient Legendary'
               }
             }
           }
@@ -353,12 +362,12 @@ export default {
             type: 'select',
             options: {
               options: {
-                Common: 'Common',
-                Rare: 'Rare',
-                Epic: 'Epic',
-                PerfectEpic: 'PerfectEpic',
-                Legendary: 'Legendary',
-                AncientLegendary: 'AncientLegendary'
+                common: 'Common',
+                rare: 'Rare',
+                epic: 'Epic',
+                perfectEpic: 'Perfect Epic',
+                legendary: 'Legendary',
+                ancientLegendary: 'Ancient Legendary'
               }
             }
           }
@@ -403,12 +412,12 @@ export default {
             type: 'select',
             options: {
               options: {
-                Common: 'Common',
-                Rare: 'Rare',
-                Epic: 'Epic',
-                PerfectEpic: 'PerfectEpic',
-                Legendary: 'Legendary',
-                AncientLegendary: 'AncientLegendary'
+                common: 'Common',
+                rare: 'Rare',
+                epic: 'Epic',
+                perfectEpic: 'Perfect Epic',
+                legendary: 'Legendary',
+                ancientLegendary: 'Ancient Legendary'
               }
             }
           }
@@ -453,12 +462,12 @@ export default {
             type: 'select',
             options: {
               options: {
-                Common: 'Common',
-                Rare: 'Rare',
-                Epic: 'Epic',
-                PerfectEpic: 'PerfectEpic',
-                Legendary: 'Legendary',
-                AncientLegendary: 'AncientLegendary'
+                common: 'Common',
+                rare: 'Rare',
+                epic: 'Epic',
+                perfectEpic: 'Perfect Epic',
+                legendary: 'Legendary',
+                ancientLegendary: 'Ancient Legendary'
               }
             }
           }
@@ -479,5 +488,21 @@ export default {
     await Pet.fetchAll()
     await Talent.fetchAll()
     await Weapon.fetchAll()
+
+    await UserRing.fetchAll()
+    // await UserArmor.fetchAll()
+    // await UserBracelet.fetchAll()
+    // await UserHero.fetchAll()
+    // await UserLocket.fetchAll()
+    // await UserPet.fetchAll()
+    // await UserTalent.fetchAll()
+    // await UserWeapon.fetchAll()
+  },
+  beforeSubmit: async (id) => {
+    if(!id) return
+    const userRings = UserRing.query().whereFk('userId', id).get()
+    userRings.forEach(userRing => {
+      userRing.$delete()
+    })
   }
 }

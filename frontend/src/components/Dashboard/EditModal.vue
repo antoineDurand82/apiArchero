@@ -152,15 +152,12 @@ export default {
       else this.setModel()
     },
     setModel() {
-      const entity = this.entity
-      if(this.model) this.editingModel = entity ? new entity(this.model) : {...this.model}
+      if(this.model) this.editingModel = {...this.model}
       else {
-        const model = entity ? new entity() : {}
-        if(!entity) {
-          this.form.fields.forEach((field) => {
-            model[field.key] = this.getDefaultValue(field)
-          })
-        }
+        const model = {}
+        this.form.fields.forEach((field) => {
+          model[field.key] = this.getDefaultValue(field)
+        })
         this.editingModel = model
       }
     }
