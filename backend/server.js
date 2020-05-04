@@ -40,6 +40,7 @@ require("./app/routes/userPet.routes")(app);
 require("./app/routes/userRing.routes")(app);
 require("./app/routes/userTalent.routes")(app);
 require("./app/routes/userWeapon.routes")(app);
+require("./app/routes/upgradeRequirement.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
